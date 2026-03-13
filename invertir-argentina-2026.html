@@ -1,0 +1,2677 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Academia Bursátil Argentina 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #080c14;
+    --surface: #0d1420;
+    --card: #111827;
+    --border: #1e2d47;
+    --accent: #00e5a0;
+    --accent2: #3b82f6;
+    --accent3: #f59e0b;
+    --accent4: #ef4444;
+    --accent5: #a855f7;
+    --text: #e2e8f0;
+    --muted: #64748b;
+    --mono: 'Space Mono', monospace;
+    --sans: 'DM Sans', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* GRID BG */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,229,160,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,229,160,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(8,12,20,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+  }
+
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 1rem;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+  }
+
+  .nav-tabs {
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .nav-tab {
+    padding: 0.4rem 1rem;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--muted);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+    white-space: nowrap;
+    background: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    font-family: var(--sans);
+  }
+
+  .nav-tab:hover { color: var(--text); }
+  .nav-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+  .nav-badge {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--accent);
+    background: rgba(0,229,160,0.1);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+  }
+
+  /* MAIN */
+  main { position: relative; z-index: 1; }
+
+  .section {
+    display: none;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .section.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* HERO */
+  .hero {
+    text-align: center;
+    padding: 4rem 2rem 3rem;
+    position: relative;
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--accent);
+    background: rgba(0,229,160,0.08);
+    border: 1px solid rgba(0,229,160,0.2);
+    padding: 0.35rem 0.9rem;
+    border-radius: 100px;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-title {
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    letter-spacing: -0.03em;
+  }
+
+  .hero-title span {
+    background: linear-gradient(135deg, var(--accent) 0%, #00b4d8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-sub {
+    font-size: 1.1rem;
+    color: var(--muted);
+    max-width: 600px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.6;
+  }
+
+  /* STATS BAR */
+  .stats-bar {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 3rem;
+  }
+
+  .stat-chip {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.82rem;
+  }
+
+  .stat-chip .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  /* ROADMAP */
+  .roadmap {
+    position: relative;
+    padding: 1rem 0;
+  }
+
+  .roadmap-line {
+    position: absolute;
+    left: 28px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, var(--accent) 0%, var(--accent2) 50%, var(--accent5) 100%);
+  }
+
+  .roadmap-step {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    cursor: pointer;
+  }
+
+  .step-dot {
+    width: 58px;
+    height: 58px;
+    min-width: 58px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--mono);
+    font-size: 1.1rem;
+    font-weight: 700;
+    border: 2px solid;
+    background: var(--bg);
+    transition: all 0.3s;
+    z-index: 1;
+  }
+
+  .roadmap-step:hover .step-dot {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px currentColor;
+  }
+
+  .step-content {
+    flex: 1;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.2rem 1.5rem;
+    transition: border-color 0.3s;
+  }
+
+  .roadmap-step:hover .step-content { border-color: var(--accent); }
+
+  .step-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+  }
+
+  .step-title {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .step-time {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--muted);
+    background: var(--surface);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+  }
+
+  .step-desc {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.5;
+    margin-bottom: 0.8rem;
+  }
+
+  .step-tasks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .task-tag {
+    font-size: 0.72rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    background: rgba(255,255,255,0.05);
+    color: var(--text);
+  }
+
+  /* CARDS GRID */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+
+  @media (max-width: 768px) {
+    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+    nav { padding: 0 1rem; }
+    .section { padding: 1rem; }
+    .hero { padding: 2rem 1rem; }
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.3rem;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--card-color, var(--accent));
+    transform: scaleX(0);
+    transition: transform 0.3s;
+  }
+
+  .card:hover { border-color: var(--card-color, var(--accent)); transform: translateY(-2px); }
+  .card:hover::before { transform: scaleX(1); }
+
+  .card-icon {
+    font-size: 2rem;
+    margin-bottom: 0.7rem;
+  }
+
+  .card-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+  }
+
+  .card-sub {
+    font-size: 0.8rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* KPI TABLE */
+  .kpi-section { margin-bottom: 2rem; }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-header h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+  }
+
+  .section-tag {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--accent);
+    background: rgba(0,229,160,0.1);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+  }
+
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+
+  .kpi-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.1rem;
+    cursor: pointer;
+    transition: all 0.25s;
+  }
+
+  .kpi-card:hover { border-color: var(--kpi-color, var(--accent)); background: rgba(0,229,160,0.03); }
+
+  .kpi-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+  }
+
+  .kpi-name {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--kpi-color, var(--accent));
+  }
+
+  .kpi-category {
+    font-size: 0.65rem;
+    color: var(--muted);
+    background: var(--surface);
+    padding: 0.1rem 0.4rem;
+    border-radius: 3px;
+  }
+
+  .kpi-desc {
+    font-size: 0.8rem;
+    color: var(--muted);
+    line-height: 1.45;
+    margin-bottom: 0.5rem;
+  }
+
+  .kpi-formula {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--kpi-color, var(--accent));
+    background: rgba(0,229,160,0.05);
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    border-left: 2px solid var(--kpi-color, var(--accent));
+  }
+
+  .kpi-signal {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.72rem;
+    margin-top: 0.5rem;
+  }
+
+  /* TAX TABLE */
+  .tax-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.82rem;
+  }
+
+  .tax-table th {
+    text-align: left;
+    padding: 0.7rem 1rem;
+    background: var(--surface);
+    color: var(--muted);
+    font-weight: 500;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .tax-table td {
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid rgba(30,45,71,0.5);
+    vertical-align: top;
+    line-height: 1.4;
+  }
+
+  .tax-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+  .tax-badge {
+    display: inline-block;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.72rem;
+    font-family: var(--mono);
+    font-weight: 700;
+  }
+
+  .badge-green { background: rgba(0,229,160,0.15); color: var(--accent); }
+  .badge-red { background: rgba(239,68,68,0.15); color: var(--accent4); }
+  .badge-yellow { background: rgba(245,158,11,0.15); color: var(--accent3); }
+  .badge-blue { background: rgba(59,130,246,0.15); color: var(--accent2); }
+  .badge-purple { background: rgba(168,85,247,0.15); color: var(--accent5); }
+
+  /* BROKER CARDS */
+  .broker-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.3rem;
+    transition: all 0.3s;
+  }
+
+  .broker-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+
+  .broker-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 0.8rem;
+  }
+
+  .broker-name {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+  }
+
+  .broker-type {
+    font-size: 0.7rem;
+    color: var(--muted);
+  }
+
+  .broker-stars {
+    display: flex;
+    gap: 2px;
+  }
+
+  .star { color: var(--accent3); font-size: 0.8rem; }
+  .star.empty { color: var(--border); }
+
+  .broker-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin: 0.7rem 0;
+  }
+
+  .feature-tag {
+    font-size: 0.68rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 3px;
+    background: rgba(59,130,246,0.1);
+    color: var(--accent2);
+    border: 1px solid rgba(59,130,246,0.2);
+  }
+
+  .broker-score {
+    display: flex;
+    gap: 0.7rem;
+    margin-top: 0.8rem;
+    padding-top: 0.8rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .score-item {
+    flex: 1;
+    text-align: center;
+  }
+
+  .score-val {
+    font-family: var(--mono);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  .score-label {
+    font-size: 0.65rem;
+    color: var(--muted);
+    margin-top: 0.1rem;
+  }
+
+  /* PORTFOLIO BUILDER */
+  .portfolio-visual {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .donut-container {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .donut-svg { flex-shrink: 0; }
+
+  .legend { flex: 1; min-width: 200px; }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(30,45,71,0.4);
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .legend-item:hover { color: var(--accent); }
+
+  .legend-left {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  .legend-pct {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  /* PROFILE SELECTOR */
+  .profile-tabs {
+    display: flex;
+    gap: 0.7rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .profile-btn {
+    padding: 0.5rem 1.2rem;
+    border-radius: 8px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--muted);
+    transition: all 0.2s;
+    font-family: var(--sans);
+  }
+
+  .profile-btn:hover { border-color: var(--accent); color: var(--text); }
+  .profile-btn.active { background: rgba(0,229,160,0.1); border-color: var(--accent); color: var(--accent); }
+
+  /* FLOW DIAGRAM */
+  .flow-diagram {
+    overflow-x: auto;
+    padding: 1rem 0;
+  }
+
+  .flow-svg { min-width: 600px; }
+
+  /* CHECKLIST */
+  .checklist-item {
+    display: flex;
+    gap: 1rem;
+    padding: 0.9rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 0.7rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    align-items: flex-start;
+  }
+
+  .checklist-item:hover { border-color: var(--accent); }
+  .checklist-item.done { opacity: 0.6; }
+  .checklist-item.done .check-box { background: var(--accent); border-color: var(--accent); }
+
+  .check-box {
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+    border-radius: 4px;
+    border: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    margin-top: 2px;
+    transition: all 0.2s;
+  }
+
+  .check-content { flex: 1; }
+  .check-title { font-size: 0.88rem; font-weight: 600; margin-bottom: 0.2rem; }
+  .check-desc { font-size: 0.78rem; color: var(--muted); }
+
+  /* ACCORDION */
+  .accordion-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 0.7rem;
+    overflow: hidden;
+  }
+
+  .accordion-header {
+    padding: 1rem 1.2rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.2s;
+    user-select: none;
+  }
+
+  .accordion-header:hover { background: rgba(255,255,255,0.02); }
+
+  .accordion-title {
+    font-size: 0.92rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+  }
+
+  .accordion-arrow {
+    color: var(--muted);
+    transition: transform 0.3s;
+    font-size: 0.8rem;
+  }
+
+  .accordion-item.open .accordion-arrow { transform: rotate(180deg); }
+
+  .accordion-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+  }
+
+  .accordion-body.open { max-height: 1000px; }
+
+  .accordion-content {
+    padding: 0 1.2rem 1.2rem;
+    font-size: 0.83rem;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  .accordion-content ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 0.5rem;
+  }
+
+  .accordion-content ul li {
+    padding: 0.25rem 0;
+    padding-left: 1rem;
+    position: relative;
+  }
+
+  .accordion-content ul li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 0.6rem;
+    top: 5px;
+  }
+
+  /* PROGRESS BAR */
+  .progress-bar {
+    height: 6px;
+    background: var(--surface);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-top: 0.4rem;
+  }
+
+  .progress-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 1s ease;
+  }
+
+  /* TICKER */
+  .ticker-wrap {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.6rem 1rem;
+    overflow: hidden;
+    margin-bottom: 2rem;
+  }
+
+  .ticker-inner {
+    display: flex;
+    gap: 2rem;
+    animation: scroll 30s linear infinite;
+    white-space: nowrap;
+  }
+
+  @keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .ticker-item {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+  }
+
+  .ticker-up { color: var(--accent); }
+  .ticker-down { color: var(--accent4); }
+
+  /* TOOLTIP */
+  .tooltip {
+    position: relative;
+  }
+
+  .tooltip-text {
+    display: none;
+    position: absolute;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1e2d47;
+    color: var(--text);
+    font-size: 0.72rem;
+    padding: 0.4rem 0.7rem;
+    border-radius: 5px;
+    white-space: nowrap;
+    z-index: 100;
+    border: 1px solid var(--border);
+  }
+
+  .tooltip:hover .tooltip-text { display: block; }
+
+  /* GLOSSARY */
+  .glossary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 0.8rem;
+  }
+
+  .gloss-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .gloss-card:hover { border-color: var(--accent2); }
+
+  .gloss-term {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--accent2);
+    margin-bottom: 0.3rem;
+  }
+
+  .gloss-def {
+    font-size: 0.78rem;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  /* RISK METER */
+  .risk-meter {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .risk-label { font-size: 0.7rem; color: var(--muted); }
+
+  .risk-bar {
+    flex: 1;
+    height: 6px;
+    background: linear-gradient(90deg, var(--accent) 0%, var(--accent3) 50%, var(--accent4) 100%);
+    border-radius: 3px;
+    position: relative;
+  }
+
+  .risk-pointer {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 12px;
+    height: 12px;
+    background: white;
+    border-radius: 50%;
+    border: 2px solid var(--bg);
+    box-shadow: 0 0 0 2px currentColor;
+  }
+
+  /* SEARCH */
+  .search-box {
+    width: 100%;
+    padding: 0.7rem 1rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 0.88rem;
+    margin-bottom: 1.2rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .search-box:focus { border-color: var(--accent); }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--muted); }
+
+  /* ALERT */
+  .alert {
+    padding: 0.9rem 1.2rem;
+    border-radius: 8px;
+    font-size: 0.82rem;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+    display: flex;
+    gap: 0.7rem;
+    align-items: flex-start;
+  }
+
+  .alert-info { background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.2); }
+  .alert-warn { background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.2); }
+  .alert-success { background: rgba(0,229,160,0.08); border: 1px solid rgba(0,229,160,0.2); }
+
+  /* ANIMATE ON LOAD */
+  .fade-in { animation: fadeIn 0.5s ease forwards; }
+
+  .stagger { opacity: 0; }
+  .stagger:nth-child(1) { animation: fadeIn 0.3s 0.1s forwards; }
+  .stagger:nth-child(2) { animation: fadeIn 0.3s 0.2s forwards; }
+  .stagger:nth-child(3) { animation: fadeIn 0.3s 0.3s forwards; }
+  .stagger:nth-child(4) { animation: fadeIn 0.3s 0.4s forwards; }
+  .stagger:nth-child(5) { animation: fadeIn 0.3s 0.5s forwards; }
+  .stagger:nth-child(6) { animation: fadeIn 0.3s 0.6s forwards; }
+
+  h3 { font-size: 1rem; font-weight: 600; margin-bottom: 1rem; }
+
+  .section-gap { height: 2rem; }
+
+  .sub-title {
+    font-size: 0.75rem;
+    color: var(--muted);
+    font-family: var(--mono);
+    margin-bottom: 1rem;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">◈ ACADEMIA BURSÁTIL AR</div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="showSection('home')">🗺 Hoja de Ruta</button>
+    <button class="nav-tab" onclick="showSection('activos')">📦 Activos</button>
+    <button class="nav-tab" onclick="showSection('kpis')">📊 KPIs</button>
+    <button class="nav-tab" onclick="showSection('cartera')">💼 Cartera</button>
+    <button class="nav-tab" onclick="showSection('impuestos')">🧾 Impuestos</button>
+    <button class="nav-tab" onclick="showSection('brokers')">🏛 Brokers</button>
+    <button class="nav-tab" onclick="showSection('glosario')">📚 Glosario</button>
+  </div>
+  <div class="nav-badge">2026 ●</div>
+</nav>
+
+<main>
+
+<!-- ==================== HOME ==================== -->
+<section id="home" class="section active">
+  <div class="hero">
+    <div class="hero-tag">
+      <span style="width:6px;height:6px;background:var(--accent);border-radius:50%;animation:pulse 1.5s infinite"></span>
+      Sistema actualizado · Marzo 2026
+    </div>
+    <h1 class="hero-title">Tu camino para <span>invertir en la Bolsa</span><br>Argentina desde cero</h1>
+    <p class="hero-sub">Guía completa, interactiva y actualizada para convertirte en inversor en 2–3 meses. Del 0 al mercado de capitales.</p>
+
+    <div class="stats-bar">
+      <div class="stat-chip"><span class="dot" style="background:var(--accent)"></span> MERVAL activo · riesgo país ~500pts</div>
+      <div class="stat-chip"><span class="dot" style="background:var(--accent3)"></span> Inflación ~60% anual 2025</div>
+      <div class="stat-chip"><span class="dot" style="background:var(--accent2)"></span> BYMA mercado principal</div>
+      <div class="stat-chip"><span class="dot" style="background:var(--accent5)"></span> +30 ALyC regulados CNV</div>
+    </div>
+  </div>
+
+  <!-- Ticker -->
+  <div class="ticker-wrap">
+    <div class="ticker-inner">
+      <span class="ticker-item ticker-up">▲ YPF +7044% (5y)</span>
+      <span class="ticker-item ticker-up">▲ PAMPA +6456% (5y)</span>
+      <span class="ticker-item ticker-up">▲ GGAL +4100% (5y)</span>
+      <span class="ticker-item ticker-up">▲ CEDEAR AAPL</span>
+      <span class="ticker-item ticker-up">▲ CEDEAR QQQ</span>
+      <span class="ticker-item ticker-up">▲ ON Dólar link</span>
+      <span class="ticker-item">◈ FCI Money Market</span>
+      <span class="ticker-item">◈ Caución Bursátil</span>
+      <span class="ticker-item ticker-up">▲ Bonos AL30</span>
+      <span class="ticker-item ticker-up">▲ Letes USD</span>
+      <span class="ticker-item ticker-up">▲ YPF +7044% (5y)</span>
+      <span class="ticker-item ticker-up">▲ PAMPA +6456% (5y)</span>
+      <span class="ticker-item ticker-up">▲ GGAL +4100% (5y)</span>
+      <span class="ticker-item ticker-up">▲ CEDEAR AAPL</span>
+      <span class="ticker-item ticker-up">▲ CEDEAR QQQ</span>
+      <span class="ticker-item ticker-up">▲ ON Dólar link</span>
+      <span class="ticker-item">◈ FCI Money Market</span>
+    </div>
+  </div>
+
+  <!-- ROADMAP -->
+  <div class="section-header">
+    <h2>Hoja de Ruta: De 0 a Inversor</h2>
+    <span class="section-tag">6 ETAPAS · ~3 MESES</span>
+  </div>
+
+  <div class="roadmap">
+    <div class="roadmap-line"></div>
+
+    <div class="roadmap-step" onclick="toggleStep(this)">
+      <div class="step-dot" style="color:var(--accent);border-color:var(--accent)">01</div>
+      <div class="step-content">
+        <div class="step-header">
+          <span class="step-title">🧠 Fundamentos Financieros</span>
+          <span class="step-time">Semana 1-2</span>
+        </div>
+        <p class="step-desc">Entendé el sistema financiero argentino, qué es la bolsa, cómo funciona BYMA y por qué invertir. Aprendé conceptos clave antes de poner un peso.</p>
+        <div class="step-tasks">
+          <span class="task-tag">¿Qué es BYMA?</span>
+          <span class="task-tag">Renta fija vs variable</span>
+          <span class="task-tag">Mercado primario/secundario</span>
+          <span class="task-tag">Perfil de riesgo</span>
+          <span class="task-tag">Inflación e inversión</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="roadmap-step" onclick="toggleStep(this)">
+      <div class="step-dot" style="color:var(--accent2);border-color:var(--accent2)">02</div>
+      <div class="step-content">
+        <div class="step-header">
+          <span class="step-title">🏛 Elegir tu ALYC / Broker</span>
+          <span class="step-time">Semana 2-3</span>
+        </div>
+        <p class="step-desc">Abrí tu cuenta comitente en un ALyC regulado por la CNV. Comparar comisiones, plataformas y activos disponibles. Sin un ALyC no podés operar en BYMA.</p>
+        <div class="step-tasks">
+          <span class="task-tag">Abrir cuenta comitente</span>
+          <span class="task-tag">DNI + CBU</span>
+          <span class="task-tag">Transferir fondos</span>
+          <span class="task-tag">IOL / Balanz / Cocos</span>
+          <span class="task-tag">Verificación CNV</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="roadmap-step" onclick="toggleStep(this)">
+      <div class="step-dot" style="color:var(--accent3);border-color:var(--accent3)">03</div>
+      <div class="step-content">
+        <div class="step-header">
+          <span class="step-title">📦 Conocer los Activos</span>
+          <span class="step-time">Semana 3-4</span>
+        </div>
+        <p class="step-desc">Estudiar cada tipo de instrumento disponible: acciones, CEDEARs, bonos, FCI, cauciones, ONs y futuros. Saber cuándo usar cada uno según tu objetivo.</p>
+        <div class="step-tasks">
+          <span class="task-tag">Acciones MERVAL</span>
+          <span class="task-tag">CEDEARs dólar</span>
+          <span class="task-tag">Bonos soberanos</span>
+          <span class="task-tag">FCI liquidez</span>
+          <span class="task-tag">Cauciones</span>
+          <span class="task-tag">ONs corporativas</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="roadmap-step" onclick="toggleStep(this)">
+      <div class="step-dot" style="color:var(--accent5);border-color:var(--accent5)">04</div>
+      <div class="step-content">
+        <div class="step-header">
+          <span class="step-title">📊 Análisis de Activos (KPIs)</span>
+          <span class="step-time">Semana 4-6</span>
+        </div>
+        <p class="step-desc">Aprender a leer balances, calcular ratios financieros y usar análisis técnico básico. No comprés acciones sin entender qué estás comprando.</p>
+        <div class="step-tasks">
+          <span class="task-tag">P/E · P/BV</span>
+          <span class="task-tag">ROE · ROA</span>
+          <span class="task-tag">TIR de bono</span>
+          <span class="task-tag">Análisis técnico</span>
+          <span class="task-tag">Volumen operado</span>
+          <span class="task-tag">EV/EBITDA</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="roadmap-step" onclick="toggleStep(this)">
+      <div class="step-dot" style="color:#ec4899;border-color:#ec4899">05</div>
+      <div class="step-content">
+        <div class="step-header">
+          <span class="step-title">💼 Armar tu Primera Cartera</span>
+          <span class="step-time">Semana 6-8</span>
+        </div>
+        <p class="step-desc">Diseñar una cartera diversificada según tu perfil de riesgo. Combinar activos locales e internacionales, en pesos y dólares, corto y largo plazo.</p>
+        <div class="step-tasks">
+          <span class="task-tag">Perfil conservador/moderado/agresivo</span>
+          <span class="task-tag">Diversificación sectorial</span>
+          <span class="task-tag">% en dólares</span>
+          <span class="task-tag">Rebalanceo</span>
+          <span class="task-tag">Dollar Cost Averaging</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="roadmap-step" onclick="toggleStep(this)">
+      <div class="step-dot" style="color:var(--accent4);border-color:var(--accent4)">06</div>
+      <div class="step-content">
+        <div class="step-header">
+          <span class="step-title">🧾 Impuestos y Seguimiento</span>
+          <span class="step-time">Semana 8-12</span>
+        </div>
+        <p class="step-desc">Entender el tratamiento fiscal de cada activo (Ganancias y Bienes Personales). Armar un sistema de seguimiento de tu cartera y métricas de performance.</p>
+        <div class="step-tasks">
+          <span class="task-tag">Impuesto a las Ganancias</span>
+          <span class="task-tag">Bienes Personales</span>
+          <span class="task-tag">ARCA (ex-AFIP)</span>
+          <span class="task-tag">Registro de operaciones</span>
+          <span class="task-tag">Benchmark MERVAL</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FLUJO OPERATIVO -->
+  <div class="section-gap"></div>
+  <div class="section-header">
+    <h2>Flujo para Operar tu Primera Compra</h2>
+    <span class="section-tag">PASO A PASO</span>
+  </div>
+
+  <div class="flow-diagram">
+    <svg class="flow-svg" viewBox="0 0 700 120" xmlns="http://www.w3.org/2000/svg" style="height:120px">
+      <defs>
+        <marker id="arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+          <polygon points="0 0, 8 3, 0 6" fill="#1e2d47"/>
+        </marker>
+      </defs>
+      <!-- Steps -->
+      <g>
+        <!-- Step 1 -->
+        <rect x="5" y="30" width="100" height="50" rx="8" fill="#0d1420" stroke="#1e2d47" stroke-width="1.5"/>
+        <text x="55" y="52" text-anchor="middle" fill="#00e5a0" font-family="Space Mono" font-size="9">PASO 1</text>
+        <text x="55" y="68" text-anchor="middle" fill="#e2e8f0" font-family="DM Sans" font-size="10">Abrir cuenta</text>
+        <text x="55" y="80" text-anchor="middle" fill="#64748b" font-family="DM Sans" font-size="9">ALyC CNV</text>
+
+        <line x1="105" y1="55" x2="127" y2="55" stroke="#1e2d47" stroke-width="1.5" marker-end="url(#arr)"/>
+
+        <!-- Step 2 -->
+        <rect x="130" y="30" width="100" height="50" rx="8" fill="#0d1420" stroke="#1e2d47" stroke-width="1.5"/>
+        <text x="180" y="52" text-anchor="middle" fill="#3b82f6" font-family="Space Mono" font-size="9">PASO 2</text>
+        <text x="180" y="68" text-anchor="middle" fill="#e2e8f0" font-family="DM Sans" font-size="10">Fondear</text>
+        <text x="180" y="80" text-anchor="middle" fill="#64748b" font-family="DM Sans" font-size="9">Transferencia CBU</text>
+
+        <line x1="230" y1="55" x2="252" y2="55" stroke="#1e2d47" stroke-width="1.5" marker-end="url(#arr)"/>
+
+        <!-- Step 3 -->
+        <rect x="255" y="30" width="100" height="50" rx="8" fill="#0d1420" stroke="#1e2d47" stroke-width="1.5"/>
+        <text x="305" y="52" text-anchor="middle" fill="#f59e0b" font-family="Space Mono" font-size="9">PASO 3</text>
+        <text x="305" y="68" text-anchor="middle" fill="#e2e8f0" font-family="DM Sans" font-size="10">Analizar</text>
+        <text x="305" y="80" text-anchor="middle" fill="#64748b" font-family="DM Sans" font-size="9">KPIs del activo</text>
+
+        <line x1="355" y1="55" x2="377" y2="55" stroke="#1e2d47" stroke-width="1.5" marker-end="url(#arr)"/>
+
+        <!-- Step 4 -->
+        <rect x="380" y="30" width="100" height="50" rx="8" fill="#0d1420" stroke="#1e2d47" stroke-width="1.5"/>
+        <text x="430" y="52" text-anchor="middle" fill="#a855f7" font-family="Space Mono" font-size="9">PASO 4</text>
+        <text x="430" y="68" text-anchor="middle" fill="#e2e8f0" font-family="DM Sans" font-size="10">Orden de compra</text>
+        <text x="430" y="80" text-anchor="middle" fill="#64748b" font-family="DM Sans" font-size="9">Límite / Mercado</text>
+
+        <line x1="480" y1="55" x2="502" y2="55" stroke="#1e2d47" stroke-width="1.5" marker-end="url(#arr)"/>
+
+        <!-- Step 5 -->
+        <rect x="505" y="30" width="100" height="50" rx="8" fill="#0d1420" stroke="#00e5a0" stroke-width="1.5"/>
+        <text x="555" y="52" text-anchor="middle" fill="#00e5a0" font-family="Space Mono" font-size="9">PASO 5</text>
+        <text x="555" y="68" text-anchor="middle" fill="#e2e8f0" font-family="DM Sans" font-size="10">Liquidación</text>
+        <text x="555" y="80" text-anchor="middle" fill="#64748b" font-family="DM Sans" font-size="9">T+2 días hábiles</text>
+
+        <!-- Labels -->
+        <text x="55" y="110" text-anchor="middle" fill="#64748b" font-family="DM Sans" font-size="8">DNI + CUIL</text>
+        <text x="180" y="110" text-anchor="middle" fill="#64748b" font-family="DM Sans" font-size="8">ARS o USD</text>
+        <text x="305" y="110" text-anchor="middle" fill="#64748b" font-family="DM Sans" font-size="8">Fundamental/Técnico</text>
+        <text x="430" y="110" text-anchor="middle" fill="#64748b" font-family="DM Sans" font-size="8">Precio y cantidad</text>
+        <text x="555" y="110" text-anchor="middle" fill="#64748b" font-family="DM Sans" font-size="8">En cuenta comitente</text>
+      </g>
+    </svg>
+  </div>
+
+  <!-- Checklist de inicio -->
+  <div class="section-gap"></div>
+  <div class="section-header">
+    <h2>Checklist del Inversor Principiante</h2>
+    <span class="section-tag">COMPLETÁ TU PROGRESO</span>
+  </div>
+
+  <div id="checklist">
+    <div class="checklist-item" onclick="toggleCheck(this)">
+      <div class="check-box">✓</div>
+      <div class="check-content">
+        <div class="check-title">Entendí la diferencia entre renta fija y variable</div>
+        <div class="check-desc">Renta fija = retorno previsible (bonos, plazos). Renta variable = retorno depende del mercado (acciones).</div>
+      </div>
+    </div>
+    <div class="checklist-item" onclick="toggleCheck(this)">
+      <div class="check-box">✓</div>
+      <div class="check-content">
+        <div class="check-title">Definí mi perfil de riesgo</div>
+        <div class="check-desc">Conservador · Moderado · Agresivo. Define cuánta volatilidad podés tolerar sin vender en pánico.</div>
+      </div>
+    </div>
+    <div class="checklist-item" onclick="toggleCheck(this)">
+      <div class="check-box">✓</div>
+      <div class="check-content">
+        <div class="check-title">Abrí mi cuenta comitente en un ALyC regulado</div>
+        <div class="check-desc">Solo necesitás DNI, CUIL y CBU. En plataformas como IOL o Cocos, es 100% online en menos de 24hs.</div>
+      </div>
+    </div>
+    <div class="checklist-item" onclick="toggleCheck(this)">
+      <div class="check-box">✓</div>
+      <div class="check-content">
+        <div class="check-title">Hice mi primer depósito y compré un FCI o caución</div>
+        <div class="check-desc">Empezá con instrumentos de baja volatilidad para entender el funcionamiento antes de asumir más riesgo.</div>
+      </div>
+    </div>
+    <div class="checklist-item" onclick="toggleCheck(this)">
+      <div class="check-box">✓</div>
+      <div class="check-content">
+        <div class="check-title">Analicé al menos 3 acciones con sus KPIs</div>
+        <div class="check-desc">Revisé P/E, ROE, deuda/equity y comparé con competidores del sector antes de comprar.</div>
+      </div>
+    </div>
+    <div class="checklist-item" onclick="toggleCheck(this)">
+      <div class="check-box">✓</div>
+      <div class="check-content">
+        <div class="check-title">Armé mi cartera diversificada con al menos 4 activos distintos</div>
+        <div class="check-desc">Incluí pesos y dólares, local e internacional, distintos sectores. No concentré más del 30% en un activo.</div>
+      </div>
+    </div>
+    <div class="checklist-item" onclick="toggleCheck(this)">
+      <div class="check-box">✓</div>
+      <div class="check-content">
+        <div class="check-title">Entendí qué impuestos debo declarar por mis inversiones</div>
+        <div class="check-desc">Revisé el tratamiento en Ganancias y Bienes Personales de cada activo que tengo en cartera.</div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ==================== ACTIVOS ==================== -->
+<section id="activos" class="section">
+  <div class="section-header">
+    <h2>Tipos de Activos en Argentina</h2>
+    <span class="section-tag">BYMA · MERVAL · CNV</span>
+  </div>
+
+  <div class="alert alert-info">
+    <span>ℹ️</span>
+    <div>En Argentina todos los activos se negocian a través de <strong>BYMA (Bolsas y Mercados Argentinos)</strong>. Podés operarlos solo a través de un ALyC autorizado por la CNV.</div>
+  </div>
+
+  <!-- RENTA FIJA -->
+  <h3>📐 Renta Fija – Retorno Previsible</h3>
+
+  <div class="grid-2">
+    <div class="accordion-item" onclick="toggleAccordion(this)">
+      <div class="accordion-header">
+        <div class="accordion-title">
+          <span class="badge-green tax-badge">BONOS SOBERANOS</span>
+          Bonos del Estado
+        </div>
+        <span class="accordion-arrow">▼</span>
+      </div>
+      <div class="accordion-body">
+        <div class="accordion-content">
+          Títulos de deuda emitidos por el Estado Nacional. Pagan intereses periódicos y devuelven el capital al vencimiento.
+          <ul>
+            <li><strong>Bonos en pesos:</strong> LECAP, BONCER (ajustados por CER/inflación)</li>
+            <li><strong>Bonos en dólares:</strong> AL30, AL35, GD30, GD35, GD41</li>
+            <li><strong>Riesgo:</strong> Soberano argentino (riesgo país ~500pts)</li>
+            <li><strong>Ventaja fiscal:</strong> ✅ EXENTOS de Ganancias e IBP</li>
+            <li><strong>Liquidez:</strong> Alta en mercado secundario BYMA</li>
+            <li><strong>TIR actual:</strong> Entre 8% y 15% en USD según plazo</li>
+          </ul>
+          <div class="risk-meter" style="margin-top:0.8rem">
+            <span class="risk-label">Bajo</span>
+            <div class="risk-bar" style="background: linear-gradient(90deg, #00e5a0, #f59e0b, #ef4444)">
+              <div class="risk-pointer" style="left:35%; color:#3b82f6"></div>
+            </div>
+            <span class="risk-label">Alto</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item" onclick="toggleAccordion(this)">
+      <div class="accordion-header">
+        <div class="accordion-title">
+          <span class="badge-blue tax-badge">ONs</span>
+          Obligaciones Negociables
+        </div>
+        <span class="accordion-arrow">▼</span>
+      </div>
+      <div class="accordion-body">
+        <div class="accordion-content">
+          Deuda corporativa emitida por empresas privadas. Más seguras que acciones, más rentables que plazos fijos.
+          <ul>
+            <li><strong>Emisores típicos:</strong> YPF, Pampa Energía, Telecom, MercadoLibre</li>
+            <li><strong>Moneda:</strong> Pesos, dólares o dólar-linked</li>
+            <li><strong>Ventaja fiscal:</strong> ✅ EXENTAS de Ganancias (capital) y exentas en IBP si en pesos</li>
+            <li><strong>Riesgo:</strong> Crediticio del emisor (menor al soberano)</li>
+            <li><strong>Rendimientos:</strong> 6–12% USD en ONs hard-dollar</li>
+            <li><strong>Plazo:</strong> 1 a 5 años generalmente</li>
+          </ul>
+          <div class="risk-meter" style="margin-top:0.8rem">
+            <span class="risk-label">Bajo</span>
+            <div class="risk-bar">
+              <div class="risk-pointer" style="left:25%; color:#00e5a0"></div>
+            </div>
+            <span class="risk-label">Alto</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item" onclick="toggleAccordion(this)">
+      <div class="accordion-header">
+        <div class="accordion-title">
+          <span class="badge-yellow tax-badge">CAUCIONES</span>
+          Caución Bursátil
+        </div>
+        <span class="accordion-arrow">▼</span>
+      </div>
+      <div class="accordion-body">
+        <div class="accordion-content">
+          Préstamos de corto plazo respaldados por garantías. Es como un "plazo fijo de bolsa". Ideal para estacionar liquidez.
+          <ul>
+            <li><strong>Plazos:</strong> 1 a 120 días hábiles</li>
+            <li><strong>Moneda:</strong> Pesos o dólares (MEP)</li>
+            <li><strong>Ventaja:</strong> Muy seguro, respaldado por garantías bursátiles</li>
+            <li><strong>Tasa referencia:</strong> Cercana a tasa de política monetaria</li>
+            <li><strong>Ideal para:</strong> Aparcar dinero entre operaciones</li>
+            <li><strong>Tributación:</strong> Intereses en pesos EXENTOS de Ganancias</li>
+          </ul>
+          <div class="risk-meter" style="margin-top:0.8rem">
+            <span class="risk-label">Bajo</span>
+            <div class="risk-bar">
+              <div class="risk-pointer" style="left:8%; color:#00e5a0"></div>
+            </div>
+            <span class="risk-label">Alto</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item" onclick="toggleAccordion(this)">
+      <div class="accordion-header">
+        <div class="accordion-title">
+          <span class="badge-purple tax-badge">FCI</span>
+          Fondos Comunes de Inversión
+        </div>
+        <span class="accordion-arrow">▼</span>
+      </div>
+      <div class="accordion-body">
+        <div class="accordion-content">
+          Instrumentos colectivos gestionados por profesionales. Permiten diversificación desde $1.
+          <ul>
+            <li><strong>Money Market:</strong> Liquidez inmediata, rescate en 24hs</li>
+            <li><strong>Renta Fija:</strong> Bonos y plazos, más rendimiento</li>
+            <li><strong>Renta Variable:</strong> Acciones, más riesgo y retorno</li>
+            <li><strong>Mixtos / Infraestructura / Soja</strong></li>
+            <li><strong>Ventaja fiscal:</strong> Si +75% en activos exentos → FCI exento de Ganancias</li>
+            <li><strong>Comisión:</strong> TNA de administración del fondo</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-gap"></div>
+  <h3>📈 Renta Variable – Retorno Potencial Alto</h3>
+
+  <div class="grid-2">
+    <div class="accordion-item" onclick="toggleAccordion(this)">
+      <div class="accordion-header">
+        <div class="accordion-title">
+          <span class="badge-red tax-badge">ACCIONES</span>
+          Acciones del MERVAL
+        </div>
+        <span class="accordion-arrow">▼</span>
+      </div>
+      <div class="accordion-body">
+        <div class="accordion-content">
+          Participación en empresas cotizantes en BYMA. El MERVAL tiene 23 acciones líderes.
+          <ul>
+            <li><strong>Panel Líder:</strong> YPF, Galicia, Pampa Energía, Grupo Financiero Valores, Aluar, Telecom, IRSA, Cablevisión Holding</li>
+            <li><strong>Sectores:</strong> Energía, Bancario, Petróleo, Telecomunicaciones, Real Estate</li>
+            <li><strong>Rentabilidad histórica:</strong> YPF +7044% / PAM +6456% en 5 años (en pesos)</li>
+            <li><strong>Dividendos:</strong> Retención del 7% (definitiva, la empresa paga)</li>
+            <li><strong>Venta:</strong> ✅ EXENTA de Ganancias</li>
+            <li><strong>IBP:</strong> No computable (empresa paga como responsable sustituto)</li>
+            <li><strong>Liquidación:</strong> T+2 hábiles</li>
+          </ul>
+          <div class="risk-meter" style="margin-top:0.8rem">
+            <span class="risk-label">Bajo</span>
+            <div class="risk-bar">
+              <div class="risk-pointer" style="left:75%; color:#ef4444"></div>
+            </div>
+            <span class="risk-label">Alto</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item" onclick="toggleAccordion(this)">
+      <div class="accordion-header">
+        <div class="accordion-title">
+          <span class="badge-green tax-badge">CEDEARs</span>
+          Certificados de Depósito Argentinos
+        </div>
+        <span class="accordion-arrow">▼</span>
+      </div>
+      <div class="accordion-body">
+        <div class="accordion-content">
+          Representan acciones de empresas extranjeras (AAPL, GOOGL, AMZN, SPY, QQQ) operables en pesos o MEP desde BYMA.
+          <ul>
+            <li><strong>Tipo de cambio implícito:</strong> Funciona como cobertura cambiaria natural</li>
+            <li><strong>Más populares:</strong> SPY (S&P500), QQQ (Nasdaq), AAPL, AMZN, GOOGL, MELI, MSFT, NVDA</li>
+            <li><strong>Venta:</strong> ✅ EXENTA de Ganancias (art. 20 inc. w)</li>
+            <li><strong>Dividendos:</strong> Gravados como renta extranjera (escala progresiva hasta 35%)</li>
+            <li><strong>IBP:</strong> ⚠️ Gravados como bienes del exterior (0.7% a 2.25%)</li>
+            <li><strong>Ratio de conversión:</strong> Varía por activo (ej: 1 CEDEAR SPY = 1/10 del ETF)</li>
+          </ul>
+          <div class="risk-meter" style="margin-top:0.8rem">
+            <span class="risk-label">Bajo</span>
+            <div class="risk-bar">
+              <div class="risk-pointer" style="left:60%; color:#f59e0b"></div>
+            </div>
+            <span class="risk-label">Alto</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item" onclick="toggleAccordion(this)">
+      <div class="accordion-header">
+        <div class="accordion-title">
+          <span class="badge-purple tax-badge">FUTUROS</span>
+          Contratos de Futuros (ROFEX/MATBA)
+        </div>
+        <span class="accordion-arrow">▼</span>
+      </div>
+      <div class="accordion-body">
+        <div class="accordion-content">
+          Contratos para comprar/vender un activo a precio fijo en fecha futura. Instrumento para usuarios avanzados.
+          <ul>
+            <li><strong>Subyacentes:</strong> Dólar, soja, maíz, trigo, acciones, índices</li>
+            <li><strong>Mercado:</strong> MATBA-ROFEX (Rosario)</li>
+            <li><strong>Margen requerido:</strong> Solo garantía, no el valor total</li>
+            <li><strong>Uso principal:</strong> Cobertura cambiaria y especulación</li>
+            <li><strong>Ideal para:</strong> Inversores con experiencia, NO recomendado para principiantes</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item" onclick="toggleAccordion(this)">
+      <div class="accordion-header">
+        <div class="accordion-title">
+          <span class="badge-yellow tax-badge">OPCIONES</span>
+          Opciones Financieras (Calls/Puts)
+        </div>
+        <span class="accordion-arrow">▼</span>
+      </div>
+      <div class="accordion-body">
+        <div class="accordion-content">
+          Contratos que dan el derecho (no obligación) de comprar o vender un activo a precio acordado.
+          <ul>
+            <li><strong>Call:</strong> Derecho a comprar (apuesta al alza)</li>
+            <li><strong>Put:</strong> Derecho a vender (apuesta a la baja o cobertura)</li>
+            <li><strong>Prima:</strong> Precio que pagas por la opción</li>
+            <li><strong>Activos:</strong> Acciones del MERVAL líder y CEDEAR</li>
+            <li><strong>Nivel:</strong> ⚠️ Intermedio-Avanzado</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabla comparativa -->
+  <div class="section-gap"></div>
+  <div class="section-header">
+    <h2>Tabla Comparativa de Activos</h2>
+    <span class="section-tag">DECISIÓN RÁPIDA</span>
+  </div>
+
+  <div style="overflow-x:auto">
+    <table class="tax-table" style="min-width:700px">
+      <thead>
+        <tr>
+          <th>ACTIVO</th>
+          <th>MONEDA</th>
+          <th>RIESGO</th>
+          <th>LIQUIDEZ</th>
+          <th>RETORNO EST.</th>
+          <th>GANANCIAS</th>
+          <th>IDEAL PARA</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Caución</strong></td>
+          <td>ARS / USD</td>
+          <td><span class="tax-badge badge-green">MUY BAJO</span></td>
+          <td>Inmediata</td>
+          <td>Tasa política monetaria</td>
+          <td><span class="tax-badge badge-green">EXENTO</span></td>
+          <td>Aparcar liquidez</td>
+        </tr>
+        <tr>
+          <td><strong>FCI Money Market</strong></td>
+          <td>ARS</td>
+          <td><span class="tax-badge badge-green">MUY BAJO</span></td>
+          <td>24–48hs</td>
+          <td>Similar a tasa</td>
+          <td><span class="tax-badge badge-green">EXENTO (75%)</span></td>
+          <td>Emergencia / inicio</td>
+        </tr>
+        <tr>
+          <td><strong>Bonos Soberanos</strong></td>
+          <td>ARS / USD</td>
+          <td><span class="tax-badge badge-yellow">MEDIO</span></td>
+          <td>Alta (mercado)</td>
+          <td>8–15% USD TIR</td>
+          <td><span class="tax-badge badge-green">EXENTO</span></td>
+          <td>Renta en USD</td>
+        </tr>
+        <tr>
+          <td><strong>ONs Corporativas</strong></td>
+          <td>USD / ARS</td>
+          <td><span class="tax-badge badge-green">BAJO-MEDIO</span></td>
+          <td>Media</td>
+          <td>6–12% USD</td>
+          <td><span class="tax-badge badge-green">EXENTO</span></td>
+          <td>Dolarizar + renta</td>
+        </tr>
+        <tr>
+          <td><strong>Acciones MERVAL</strong></td>
+          <td>ARS</td>
+          <td><span class="tax-badge badge-red">ALTO</span></td>
+          <td>Alta</td>
+          <td>Variable · histórico +++ %</td>
+          <td><span class="tax-badge badge-green">EXENTO VENTA</span></td>
+          <td>Crecimiento largo plazo</td>
+        </tr>
+        <tr>
+          <td><strong>CEDEARs</strong></td>
+          <td>ARS (= USD)</td>
+          <td><span class="tax-badge badge-yellow">MEDIO-ALTO</span></td>
+          <td>Alta</td>
+          <td>Con mercado USA</td>
+          <td><span class="tax-badge badge-green">EXENTO VENTA</span></td>
+          <td>Dolarizar + diversif.</td>
+        </tr>
+        <tr>
+          <td><strong>Futuros / Opciones</strong></td>
+          <td>ARS / USD</td>
+          <td><span class="tax-badge badge-red">MUY ALTO</span></td>
+          <td>Alta</td>
+          <td>Ilimitado (y pérdidas)</td>
+          <td><span class="tax-badge badge-yellow">GRAVADO</span></td>
+          <td>Cobertura / especulación</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ==================== KPIs ==================== -->
+<section id="kpis" class="section">
+  <div class="section-header">
+    <h2>KPIs para Analizar un Activo</h2>
+    <span class="section-tag">ANÁLISIS FUNDAMENTAL + TÉCNICO</span>
+  </div>
+
+  <div class="alert alert-warn">
+    <span>⚠️</span>
+    <div>Nunca uses un solo indicador. Los KPIs son válidos <strong>comparados con el sector</strong> y con la historia de la misma empresa. Un P/E "alto" en tecnología puede ser "normal" para el sector.</div>
+  </div>
+
+  <!-- Análisis Fundamental - Valoración -->
+  <h3>💰 Valoración (¿Está cara o barata la acción?)</h3>
+  <div class="kpi-grid" id="kpis-valuation">
+    <div class="kpi-card" style="--kpi-color: var(--accent)">
+      <div class="kpi-header">
+        <span class="kpi-name">P/E RATIO</span>
+        <span class="kpi-category">Valoración</span>
+      </div>
+      <p class="kpi-desc">Precio de la acción dividido las ganancias por acción. Cuántas veces estás pagando las ganancias anuales.</p>
+      <div class="kpi-formula">P/E = Precio / EPS</div>
+      <div class="kpi-signal">
+        <span class="tax-badge badge-green">< 15 = Barata</span>
+        <span class="tax-badge badge-yellow">15-25 = Normal</span>
+        <span class="tax-badge badge-red">> 25 = Cara</span>
+      </div>
+    </div>
+
+    <div class="kpi-card" style="--kpi-color: var(--accent2)">
+      <div class="kpi-header">
+        <span class="kpi-name">P/BV</span>
+        <span class="kpi-category">Valoración</span>
+      </div>
+      <p class="kpi-desc">Precio sobre valor libro. Compara precio de mercado con valor contable. Muy usado en bancos (GGAL, BMA).</p>
+      <div class="kpi-formula">P/BV = Precio / (Activos - Pasivos) por acción</div>
+      <div class="kpi-signal">
+        <span class="tax-badge badge-green">< 1 = Infravalorada</span>
+        <span class="tax-badge badge-yellow">1-3 = Normal</span>
+        <span class="tax-badge badge-red">> 3 = Cara</span>
+      </div>
+    </div>
+
+    <div class="kpi-card" style="--kpi-color: var(--accent3)">
+      <div class="kpi-header">
+        <span class="kpi-name">EV/EBITDA</span>
+        <span class="kpi-category">Valoración</span>
+      </div>
+      <p class="kpi-desc">Enterprise Value sobre ganancias operativas. Más completo que P/E porque considera la deuda de la empresa.</p>
+      <div class="kpi-formula">EV/EBITDA = (Cap. Mercado + Deuda Neta) / EBITDA</div>
+      <div class="kpi-signal">
+        <span class="tax-badge badge-green">< 8 = Atractivo</span>
+        <span class="tax-badge badge-yellow">8-15 = Normal</span>
+        <span class="tax-badge badge-red">> 15 = Elevado</span>
+      </div>
+    </div>
+
+    <div class="kpi-card" style="--kpi-color: var(--accent5)">
+      <div class="kpi-header">
+        <span class="kpi-name">P/S RATIO</span>
+        <span class="kpi-category">Valoración</span>
+      </div>
+      <p class="kpi-desc">Precio sobre ventas. Útil para empresas en crecimiento que aún no tienen ganancias positivas.</p>
+      <div class="kpi-formula">P/S = Cap. Mercado / Ventas Anuales</div>
+      <div class="kpi-signal">
+        <span class="tax-badge badge-green">< 1 = Muy barato</span>
+        <span class="tax-badge badge-yellow">1-3 = Normal</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-gap"></div>
+  <h3>📊 Rentabilidad (¿Qué tan bien genera dinero?)</h3>
+  <div class="kpi-grid">
+    <div class="kpi-card" style="--kpi-color: var(--accent)">
+      <div class="kpi-header">
+        <span class="kpi-name">ROE</span>
+        <span class="kpi-category">Rentabilidad</span>
+      </div>
+      <p class="kpi-desc">Return on Equity. Qué tan eficientemente la empresa usa el capital de sus accionistas para generar ganancias.</p>
+      <div class="kpi-formula">ROE = Ganancia Neta / Patrimonio Neto</div>
+      <div class="kpi-signal">
+        <span class="tax-badge badge-red">< 10% = Bajo</span>
+        <span class="tax-badge badge-yellow">10-20% = Bueno</span>
+        <span class="tax-badge badge-green">> 20% = Excelente</span>
+      </div>
+    </div>
+
+    <div class="kpi-card" style="--kpi-color: var(--accent2)">
+      <div class="kpi-header">
+        <span class="kpi-name">ROA</span>
+        <span class="kpi-category">Rentabilidad</span>
+      </div>
+      <p class="kpi-desc">Return on Assets. Eficiencia de todos los activos (propios y con deuda) para generar ganancias.</p>
+      <div class="kpi-formula">ROA = Ganancia Neta / Total Activos</div>
+      <div class="kpi-signal">
+        <span class="tax-badge badge-red">< 5% = Bajo</span>
+        <span class="tax-badge badge-yellow">5-10% = Aceptable</span>
+        <span class="tax-badge badge-green">> 10% = Bueno</span>
+      </div>
+    </div>
+
+    <div class="kpi-card" style="--kpi-color: var(--accent3)">
+      <div class="kpi-header">
+        <span class="kpi-name">MARGEN NETO</span>
+        <span class="kpi-category">Rentabilidad</span>
+      </div>
+      <p class="kpi-desc">Porcentaje de las ventas que se convierte en ganancia final. Indica eficiencia operativa.</p>
+      <div class="kpi-formula">Margen = Ganancia Neta / Ventas × 100</div>
+      <div class="kpi-signal">
+        <span class="tax-badge badge-red">< 5% = Ajustado</span>
+        <span class="tax-badge badge-green">> 15% = Saludable</span>
+      </div>
+    </div>
+
+    <div class="kpi-card" style="--kpi-color: var(--accent4)">
+      <div class="kpi-header">
+        <span class="kpi-name">EBITDA</span>
+        <span class="kpi-category">Rentabilidad</span>
+      </div>
+      <p class="kpi-desc">Ganancias antes de intereses, impuestos, depreciación y amortización. Muestra la capacidad operativa real.</p>
+      <div class="kpi-formula">EBITDA = EBIT + Deprec. + Amortiz.</div>
+      <div class="kpi-signal">
+        <span class="tax-badge badge-blue">Comparar vs sector</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-gap"></div>
+  <h3>💳 Solvencia (¿Cuánta deuda tiene?)</h3>
+  <div class="kpi-grid">
+    <div class="kpi-card" style="--kpi-color: #ec4899">
+      <div class="kpi-header">
+        <span class="kpi-name">DEUDA / EBITDA</span>
+        <span class="kpi-category">Solvencia</span>
+      </div>
+      <p class="kpi-desc">Años que le llevaría a la empresa pagar su deuda con sus ganancias operativas actuales.</p>
+      <div class="kpi-formula">Deuda Neta / EBITDA</div>
+      <div class="kpi-signal">
+        <span class="tax-badge badge-green">< 2x = Sano</span>
+        <span class="tax-badge badge-yellow">2-4x = Moderado</span>
+        <span class="tax-badge badge-red">> 4x = Riesgoso</span>
+      </div>
+    </div>
+
+    <div class="kpi-card" style="--kpi-color: var(--accent2)">
+      <div class="kpi-header">
+        <span class="kpi-name">CURRENT RATIO</span>
+        <span class="kpi-category">Liquidez</span>
+      </div>
+      <p class="kpi-desc">Capacidad de la empresa de pagar sus deudas de corto plazo con activos corrientes.</p>
+      <div class="kpi-formula">Activos Corrientes / Pasivos Corrientes</div>
+      <div class="kpi-signal">
+        <span class="tax-badge badge-red">< 1 = Peligro</span>
+        <span class="tax-badge badge-yellow">1-1.5 = Aceptable</span>
+        <span class="tax-badge badge-green">> 1.5 = Sólido</span>
+      </div>
+    </div>
+
+    <div class="kpi-card" style="--kpi-color: var(--accent)">
+      <div class="kpi-header">
+        <span class="kpi-name">FCF YIELD</span>
+        <span class="kpi-category">Flujo de Caja</span>
+      </div>
+      <p class="kpi-desc">Free Cash Flow Yield. Porcentaje del precio de la acción que genera en flujo de caja libre. Muy importante.</p>
+      <div class="kpi-formula">FCF / Cap. Mercado × 100</div>
+      <div class="kpi-signal">
+        <span class="tax-badge badge-green">> 5% = Atractivo</span>
+        <span class="tax-badge badge-blue">Ideal para dividendos</span>
+      </div>
+    </div>
+
+    <div class="kpi-card" style="--kpi-color: var(--accent3)">
+      <div class="kpi-header">
+        <span class="kpi-name">DIVIDEND YIELD</span>
+        <span class="kpi-category">Dividendos</span>
+      </div>
+      <p class="kpi-desc">Porcentaje anual que la empresa paga en dividendos sobre el precio de la acción.</p>
+      <div class="kpi-formula">Dividendo Anual / Precio Acción × 100</div>
+      <div class="kpi-signal">
+        <span class="tax-badge badge-yellow">3-5% = Bueno</span>
+        <span class="tax-badge badge-red">> 8% = Revisar sostenibilidad</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-gap"></div>
+  <h3>📉 KPIs para Renta Fija (Bonos y ONs)</h3>
+  <div class="kpi-grid">
+    <div class="kpi-card" style="--kpi-color: var(--accent)">
+      <div class="kpi-header">
+        <span class="kpi-name">TIR / YTM</span>
+        <span class="kpi-category">Bono</span>
+      </div>
+      <p class="kpi-desc">Tasa Interna de Retorno. Rendimiento total anualizado si mantenés el bono hasta el vencimiento.</p>
+      <div class="kpi-formula">Descuenta todos los flujos futuros al precio actual</div>
+      <div class="kpi-signal"><span class="tax-badge badge-blue">Principal métrica en bonos</span></div>
+    </div>
+    <div class="kpi-card" style="--kpi-color: var(--accent2)">
+      <div class="kpi-header">
+        <span class="kpi-name">DURATION</span>
+        <span class="kpi-category">Bono</span>
+      </div>
+      <p class="kpi-desc">Sensibilidad del precio del bono a variaciones de tasa. A mayor duration, mayor impacto ante cambios de tasas.</p>
+      <div class="kpi-formula">Vida media ponderada de los flujos</div>
+      <div class="kpi-signal"><span class="tax-badge badge-yellow">Mayor duration = más riesgo de tasa</span></div>
+    </div>
+    <div class="kpi-card" style="--kpi-color: var(--accent3)">
+      <div class="kpi-header">
+        <span class="kpi-name">PARIDAD</span>
+        <span class="kpi-category">Bono</span>
+      </div>
+      <p class="kpi-desc">Precio de mercado del bono expresado como % del valor nominal (100 = par). Indica si está barato o caro.</p>
+      <div class="kpi-formula">Paridad = Precio Mercado / VN × 100</div>
+      <div class="kpi-signal">
+        <span class="tax-badge badge-green">< 100 = Descuento</span>
+        <span class="tax-badge badge-red">> 100 = Prima</span>
+      </div>
+    </div>
+    <div class="kpi-card" style="--kpi-color: var(--accent4)">
+      <div class="kpi-header">
+        <span class="kpi-name">RIESGO PAÍS</span>
+        <span class="kpi-category">Macro</span>
+      </div>
+      <p class="kpi-desc">Diferencial de tasa entre bonos argentinos y del Tesoro USA. Refleja percepción de riesgo soberano de Argentina.</p>
+      <div class="kpi-formula">EMBI+ Argentina (puntos básicos)</div>
+      <div class="kpi-signal">
+        <span class="tax-badge badge-green">< 300 = Acceso mercados</span>
+        <span class="tax-badge badge-yellow">300-600 = Actual 2026</span>
+        <span class="tax-badge badge-red">> 1000 = Crisis</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-gap"></div>
+  <h3>📈 Análisis Técnico – Señales de Precio</h3>
+  <div class="kpi-grid">
+    <div class="kpi-card" style="--kpi-color: var(--accent)">
+      <div class="kpi-header">
+        <span class="kpi-name">RSI</span>
+        <span class="kpi-category">Técnico</span>
+      </div>
+      <p class="kpi-desc">Índice de Fuerza Relativa. Mide velocidad y magnitud de los movimientos de precio entre 0 y 100.</p>
+      <div class="kpi-formula">14 períodos · Comparación ganancias/pérdidas</div>
+      <div class="kpi-signal">
+        <span class="tax-badge badge-green">< 30 = Sobrevendido ✅ Compra</span>
+        <span class="tax-badge badge-red">> 70 = Sobrecomprado</span>
+      </div>
+    </div>
+    <div class="kpi-card" style="--kpi-color: var(--accent2)">
+      <div class="kpi-header">
+        <span class="kpi-name">MEDIAS MÓVILES</span>
+        <span class="kpi-category">Técnico</span>
+      </div>
+      <p class="kpi-desc">Promedios de precio en períodos (20, 50, 200 días). Las cruces entre ellas generan señales de compra/venta.</p>
+      <div class="kpi-formula">Golden Cross (50>200) = señal alcista</div>
+      <div class="kpi-signal">
+        <span class="tax-badge badge-green">Precio > MA200 = tendencia alcista</span>
+      </div>
+    </div>
+    <div class="kpi-card" style="--kpi-color: var(--accent3)">
+      <div class="kpi-header">
+        <span class="kpi-name">VOLUMEN</span>
+        <span class="kpi-category">Técnico</span>
+      </div>
+      <p class="kpi-desc">Cantidad de acciones operadas. Confirma movimientos de precio: suba con volumen alto = señal fuerte.</p>
+      <div class="kpi-formula">Vol. promedio 30d vs Vol. actual</div>
+      <div class="kpi-signal">
+        <span class="tax-badge badge-green">Suba + Alto volumen = Confirmado</span>
+      </div>
+    </div>
+    <div class="kpi-card" style="--kpi-color: var(--accent5)">
+      <div class="kpi-header">
+        <span class="kpi-name">MACD</span>
+        <span class="kpi-category">Técnico</span>
+      </div>
+      <p class="kpi-desc">Moving Average Convergence Divergence. Indica cambios en momentum y dirección de tendencia.</p>
+      <div class="kpi-formula">MACD = EMA12 - EMA26 · Señal = EMA9</div>
+      <div class="kpi-signal">
+        <span class="tax-badge badge-green">MACD cruza arriba señal = Compra</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== CARTERA ==================== -->
+<section id="cartera" class="section">
+  <div class="section-header">
+    <h2>Armá tu Primera Cartera Diversificada</h2>
+    <span class="section-tag">DISEÑO DE PORTAFOLIO</span>
+  </div>
+
+  <div class="alert alert-success">
+    <span>✅</span>
+    <div>La diversificación no solo maximiza retornos: <strong>reduce el riesgo sin sacrificar rentabilidad</strong>. El objetivo es que no todos tus activos caigan al mismo tiempo.</div>
+  </div>
+
+  <!-- PERFIL SELECTOR -->
+  <h3>Elegí tu Perfil de Riesgo</h3>
+  <div class="profile-tabs">
+    <button class="profile-btn active" onclick="showProfile('conservador', this)">🛡️ Conservador</button>
+    <button class="profile-btn" onclick="showProfile('moderado', this)">⚖️ Moderado</button>
+    <button class="profile-btn" onclick="showProfile('agresivo', this)">🚀 Agresivo</button>
+    <button class="profile-btn" onclick="showProfile('dolar', this)">💵 Dolarizador</button>
+  </div>
+
+  <!-- PORTFOLIOS -->
+  <div id="portfolio-conservador" class="portfolio-visual">
+    <h3 style="margin-bottom:1.2rem; color:var(--accent)">🛡️ Cartera Conservadora – "Capital Protegido"</h3>
+    <p style="font-size:0.83rem;color:var(--muted);margin-bottom:1.2rem">Prioriza preservar el capital. Baja volatilidad. Ideal si no podés tolerar pérdidas temporales.</p>
+    <div class="donut-container">
+      <svg class="donut-svg" viewBox="0 0 200 200" width="200" height="200">
+        <!-- Donut chart segments -->
+        <!-- Total = 360 degrees. Segments: Cauciones 30%=108°, FCI 25%=90°, Bonos 25%=90°, ONs 15%=54°, CEDEARs 5%=18° -->
+        <circle cx="100" cy="100" r="70" fill="transparent" stroke="#0d1420" stroke-width="40"/>
+        <!-- Cauciones 30% -->
+        <circle cx="100" cy="100" r="70" fill="transparent" stroke="#00e5a0" stroke-width="40"
+          stroke-dasharray="131.95 307.88" stroke-dashoffset="0" transform="rotate(-90 100 100)"/>
+        <!-- FCI 25% -->
+        <circle cx="100" cy="100" r="70" fill="transparent" stroke="#3b82f6" stroke-width="40"
+          stroke-dasharray="109.96 329.87" stroke-dashoffset="-131.95" transform="rotate(-90 100 100)"/>
+        <!-- Bonos 25% -->
+        <circle cx="100" cy="100" r="70" fill="transparent" stroke="#f59e0b" stroke-width="40"
+          stroke-dasharray="109.96 329.87" stroke-dashoffset="-241.91" transform="rotate(-90 100 100)"/>
+        <!-- ONs 15% -->
+        <circle cx="100" cy="100" r="70" fill="transparent" stroke="#a855f7" stroke-width="40"
+          stroke-dasharray="65.97 373.86" stroke-dashoffset="-351.87" transform="rotate(-90 100 100)"/>
+        <!-- CEDEARs 5% -->
+        <circle cx="100" cy="100" r="70" fill="transparent" stroke="#ec4899" stroke-width="40"
+          stroke-dasharray="21.99 417.84" stroke-dashoffset="-417.84" transform="rotate(-90 100 100)"/>
+        <text x="100" y="96" text-anchor="middle" fill="#e2e8f0" font-family="Space Mono" font-size="13" font-weight="700">CONS.</text>
+        <text x="100" y="112" text-anchor="middle" fill="#64748b" font-family="DM Sans" font-size="10">Perfil</text>
+      </svg>
+      <div class="legend">
+        <div class="legend-item"><div class="legend-left"><div class="legend-dot" style="background:#00e5a0"></div>Cauciones Bursátiles</div><span class="legend-pct">30%</span></div>
+        <div class="legend-item"><div class="legend-left"><div class="legend-dot" style="background:#3b82f6"></div>FCI Money Market / Renta Fija</div><span class="legend-pct">25%</span></div>
+        <div class="legend-item"><div class="legend-left"><div class="legend-dot" style="background:#f59e0b"></div>Bonos Soberanos (AL30/GD30)</div><span class="legend-pct">25%</span></div>
+        <div class="legend-item"><div class="legend-left"><div class="legend-dot" style="background:#a855f7"></div>ONs Corporativas USD</div><span class="legend-pct">15%</span></div>
+        <div class="legend-item"><div class="legend-left"><div class="legend-dot" style="background:#ec4899"></div>CEDEARs ETF (SPY/QQQ)</div><span class="legend-pct">5%</span></div>
+      </div>
+    </div>
+    <div style="display:flex;gap:0.8rem;flex-wrap:wrap;margin-top:1rem">
+      <div style="flex:1;min-width:150px;background:var(--surface);padding:0.8rem;border-radius:8px;text-align:center">
+        <div style="font-family:var(--mono);font-size:1.2rem;color:var(--accent)">~60%</div>
+        <div style="font-size:0.75rem;color:var(--muted)">en dólares</div>
+      </div>
+      <div style="flex:1;min-width:150px;background:var(--surface);padding:0.8rem;border-radius:8px;text-align:center">
+        <div style="font-family:var(--mono);font-size:1.2rem;color:var(--accent2)">8–12%</div>
+        <div style="font-size:0.75rem;color:var(--muted)">retorno est. USD anual</div>
+      </div>
+      <div style="flex:1;min-width:150px;background:var(--surface);padding:0.8rem;border-radius:8px;text-align:center">
+        <div style="font-family:var(--mono);font-size:1.2rem;color:var(--accent3)">Baja</div>
+        <div style="font-size:0.75rem;color:var(--muted)">volatilidad esperada</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="portfolio-moderado" class="portfolio-visual" style="display:none">
+    <h3 style="margin-bottom:1.2rem; color:var(--accent2)">⚖️ Cartera Moderada – "Balance Inteligente"</h3>
+    <p style="font-size:0.83rem;color:var(--muted);margin-bottom:1.2rem">Mix de renta fija y variable. Acepta algo de volatilidad para crecer en el largo plazo.</p>
+    <div class="donut-container">
+      <svg class="donut-svg" viewBox="0 0 200 200" width="200" height="200">
+        <circle cx="100" cy="100" r="70" fill="transparent" stroke="#0d1420" stroke-width="40"/>
+        <circle cx="100" cy="100" r="70" fill="transparent" stroke="#3b82f6" stroke-width="40"
+          stroke-dasharray="131.95 307.88" stroke-dashoffset="0" transform="rotate(-90 100 100)"/>
+        <circle cx="100" cy="100" r="70" fill="transparent" stroke="#00e5a0" stroke-width="40"
+          stroke-dasharray="87.96 351.87" stroke-dashoffset="-131.95" transform="rotate(-90 100 100)"/>
+        <circle cx="100" cy="100" r="70" fill="transparent" stroke="#f59e0b" stroke-width="40"
+          stroke-dasharray="65.97 373.86" stroke-dashoffset="-219.91" transform="rotate(-90 100 100)"/>
+        <circle cx="100" cy="100" r="70" fill="transparent" stroke="#a855f7" stroke-width="40"
+          stroke-dasharray="43.98 395.85" stroke-dashoffset="-285.88" transform="rotate(-90 100 100)"/>
+        <circle cx="100" cy="100" r="70" fill="transparent" stroke="#ec4899" stroke-width="40"
+          stroke-dasharray="65.97 373.86" stroke-dashoffset="-329.86" transform="rotate(-90 100 100)"/>
+        <text x="100" y="96" text-anchor="middle" fill="#e2e8f0" font-family="Space Mono" font-size="12" font-weight="700">MOD.</text>
+        <text x="100" y="112" text-anchor="middle" fill="#64748b" font-family="DM Sans" font-size="10">Perfil</text>
+      </svg>
+      <div class="legend">
+        <div class="legend-item"><div class="legend-left"><div class="legend-dot" style="background:#3b82f6"></div>CEDEARs ETF + individuales</div><span class="legend-pct">30%</span></div>
+        <div class="legend-item"><div class="legend-left"><div class="legend-dot" style="background:#00e5a0"></div>Bonos + ONs USD</div><span class="legend-pct">20%</span></div>
+        <div class="legend-item"><div class="legend-left"><div class="legend-dot" style="background:#f59e0b"></div>Acciones MERVAL (2-3)</div><span class="legend-pct">15%</span></div>
+        <div class="legend-item"><div class="legend-left"><div class="legend-dot" style="background:#a855f7"></div>FCI Renta Fija</div><span class="legend-pct">10%</span></div>
+        <div class="legend-item"><div class="legend-left"><div class="legend-dot" style="background:#ec4899"></div>Acciones argentinas extra</div><span class="legend-pct">15%</span></div>
+        <div class="legend-item"><div class="legend-left"><div class="legend-dot" style="background:#64748b"></div>Cauciones / Liquidez</div><span class="legend-pct">10%</span></div>
+      </div>
+    </div>
+    <div style="display:flex;gap:0.8rem;flex-wrap:wrap;margin-top:1rem">
+      <div style="flex:1;min-width:150px;background:var(--surface);padding:0.8rem;border-radius:8px;text-align:center">
+        <div style="font-family:var(--mono);font-size:1.2rem;color:var(--accent)">~65%</div>
+        <div style="font-size:0.75rem;color:var(--muted)">en dólares / dolarizado</div>
+      </div>
+      <div style="flex:1;min-width:150px;background:var(--surface);padding:0.8rem;border-radius:8px;text-align:center">
+        <div style="font-family:var(--mono);font-size:1.2rem;color:var(--accent2)">15–25%</div>
+        <div style="font-size:0.75rem;color:var(--muted)">retorno est. USD anual</div>
+      </div>
+      <div style="flex:1;min-width:150px;background:var(--surface);padding:0.8rem;border-radius:8px;text-align:center">
+        <div style="font-family:var(--mono);font-size:1.2rem;color:var(--accent3)">Media</div>
+        <div style="font-size:0.75rem;color:var(--muted)">volatilidad esperada</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="portfolio-agresivo" class="portfolio-visual" style="display:none">
+    <h3 style="margin-bottom:1.2rem; color:var(--accent4)">🚀 Cartera Agresiva – "Máximo Crecimiento"</h3>
+    <p style="font-size:0.83rem;color:var(--muted);margin-bottom:1.2rem">Alta concentración en renta variable. Tolerá caídas del 30-40% sin vender. Horizonte mínimo 3-5 años.</p>
+    <div class="donut-container">
+      <svg class="donut-svg" viewBox="0 0 200 200" width="200" height="200">
+        <circle cx="100" cy="100" r="70" fill="transparent" stroke="#0d1420" stroke-width="40"/>
+        <circle cx="100" cy="100" r="70" fill="transparent" stroke="#ef4444" stroke-width="40"
+          stroke-dasharray="153.94 285.89" stroke-dashoffset="0" transform="rotate(-90 100 100)"/>
+        <circle cx="100" cy="100" r="70" fill="transparent" stroke="#3b82f6" stroke-width="40"
+          stroke-dasharray="109.96 329.87" stroke-dashoffset="-153.94" transform="rotate(-90 100 100)"/>
+        <circle cx="100" cy="100" r="70" fill="transparent" stroke="#a855f7" stroke-width="40"
+          stroke-dasharray="65.97 373.86" stroke-dashoffset="-263.90" transform="rotate(-90 100 100)"/>
+        <circle cx="100" cy="100" r="70" fill="transparent" stroke="#00e5a0" stroke-width="40"
+          stroke-dasharray="43.98 395.85" stroke-dashoffset="-329.87" transform="rotate(-90 100 100)"/>
+        <text x="100" y="93" text-anchor="middle" fill="#e2e8f0" font-family="Space Mono" font-size="11" font-weight="700">AGRES.</text>
+        <text x="100" y="109" text-anchor="middle" fill="#64748b" font-family="DM Sans" font-size="10">Perfil</text>
+      </svg>
+      <div class="legend">
+        <div class="legend-item"><div class="legend-left"><div class="legend-dot" style="background:#ef4444"></div>Acciones MERVAL (5-7 acciones)</div><span class="legend-pct">35%</span></div>
+        <div class="legend-item"><div class="legend-left"><div class="legend-dot" style="background:#3b82f6"></div>CEDEARs individuales Tech/Growth</div><span class="legend-pct">25%</span></div>
+        <div class="legend-item"><div class="legend-left"><div class="legend-dot" style="background:#a855f7"></div>CEDEARs ETF (SPY, QQQ)</div><span class="legend-pct">15%</span></div>
+        <div class="legend-item"><div class="legend-left"><div class="legend-dot" style="background:#00e5a0"></div>ONs / Bonos (colchón)</div><span class="legend-pct">10%</span></div>
+        <div class="legend-item"><div class="legend-left"><div class="legend-dot" style="background:#f59e0b"></div>Liquidez (oportunidades)</div><span class="legend-pct">15%</span></div>
+      </div>
+    </div>
+    <div style="display:flex;gap:0.8rem;flex-wrap:wrap;margin-top:1rem">
+      <div style="flex:1;min-width:150px;background:var(--surface);padding:0.8rem;border-radius:8px;text-align:center">
+        <div style="font-family:var(--mono);font-size:1.2rem;color:var(--accent4)">18–20%</div>
+        <div style="font-size:0.75rem;color:var(--muted)">retorno hist. USD 2025</div>
+      </div>
+      <div style="flex:1;min-width:150px;background:var(--surface);padding:0.8rem;border-radius:8px;text-align:center">
+        <div style="font-family:var(--mono);font-size:1.2rem;color:var(--accent4)">Alta</div>
+        <div style="font-size:0.75rem;color:var(--muted)">volatilidad esperada</div>
+      </div>
+      <div style="flex:1;min-width:150px;background:var(--surface);padding:0.8rem;border-radius:8px;text-align:center">
+        <div style="font-family:var(--mono);font-size:1.2rem;color:var(--accent4)">3–5 años</div>
+        <div style="font-size:0.75rem;color:var(--muted)">horizonte mínimo</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="portfolio-dolar" class="portfolio-visual" style="display:none">
+    <h3 style="margin-bottom:1.2rem; color:var(--accent3)">💵 Cartera Dolarizadora – "Preservar en USD"</h3>
+    <p style="font-size:0.83rem;color:var(--muted);margin-bottom:1.2rem">Foco en instrumentos que te dan exposición al dólar y te protegen de la devaluación del peso.</p>
+    <div class="donut-container">
+      <svg class="donut-svg" viewBox="0 0 200 200" width="200" height="200">
+        <circle cx="100" cy="100" r="70" fill="transparent" stroke="#0d1420" stroke-width="40"/>
+        <circle cx="100" cy="100" r="70" fill="transparent" stroke="#00e5a0" stroke-width="40"
+          stroke-dasharray="131.95 307.88" stroke-dashoffset="0" transform="rotate(-90 100 100)"/>
+        <circle cx="100" cy="100" r="70" fill="transparent" stroke="#3b82f6" stroke-width="40"
+          stroke-dasharray="109.96 329.87" stroke-dashoffset="-131.95" transform="rotate(-90 100 100)"/>
+        <circle cx="100" cy="100" r="70" fill="transparent" stroke="#f59e0b" stroke-width="40"
+          stroke-dasharray="87.96 351.87" stroke-dashoffset="-241.91" transform="rotate(-90 100 100)"/>
+        <circle cx="100" cy="100" r="70" fill="transparent" stroke="#a855f7" stroke-width="40"
+          stroke-dasharray="43.98 395.85" stroke-dashoffset="-329.87" transform="rotate(-90 100 100)"/>
+        <text x="100" y="93" text-anchor="middle" fill="#e2e8f0" font-family="Space Mono" font-size="10" font-weight="700">DÓLAR</text>
+        <text x="100" y="109" text-anchor="middle" fill="#64748b" font-family="DM Sans" font-size="10">Perfil</text>
+      </svg>
+      <div class="legend">
+        <div class="legend-item"><div class="legend-left"><div class="legend-dot" style="background:#00e5a0"></div>CEDEARs ETF (SPY/QQQ/EEM)</div><span class="legend-pct">30%</span></div>
+        <div class="legend-item"><div class="legend-left"><div class="legend-dot" style="background:#3b82f6"></div>ONs Hard Dollar (YPF, Pampa)</div><span class="legend-pct">25%</span></div>
+        <div class="legend-item"><div class="legend-left"><div class="legend-dot" style="background:#f59e0b"></div>Bonos USD (AL30/GD35)</div><span class="legend-pct">20%</span></div>
+        <div class="legend-item"><div class="legend-left"><div class="legend-dot" style="background:#a855f7"></div>CEDEARs individuales Tech</div><span class="legend-pct">10%</span></div>
+        <div class="legend-item"><div class="legend-left"><div class="legend-dot" style="background:#64748b"></div>Caución USD / Liquidez</div><span class="legend-pct">15%</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Principios de diversificación -->
+  <div class="section-gap"></div>
+  <div class="section-header">
+    <h2>Los 7 Principios de la Diversificación</h2>
+  </div>
+
+  <div class="grid-3">
+    <div class="card" style="--card-color: var(--accent)">
+      <div class="card-icon">🎯</div>
+      <div class="card-title">No concentrar más del 20-30%</div>
+      <div class="card-sub">En un solo activo o empresa. Si YPF cae 50%, solo pierde el 15% de tu cartera, no todo.</div>
+    </div>
+    <div class="card" style="--card-color: var(--accent2)">
+      <div class="card-icon">🌍</div>
+      <div class="card-title">Diversificar por geografía</div>
+      <div class="card-sub">Combinar activos locales (MERVAL) con internacionales (via CEDEARs). Argentina no puede caerte todo junto con el mundo.</div>
+    </div>
+    <div class="card" style="--card-color: var(--accent3)">
+      <div class="card-icon">🏭</div>
+      <div class="card-title">Diversificar por sectores</div>
+      <div class="card-sub">Energía, bancos, tecnología, consumo masivo. Que una crisis sectorial no aplaste toda tu cartera.</div>
+    </div>
+    <div class="card" style="--card-color: var(--accent5)">
+      <div class="card-icon">📅</div>
+      <div class="card-title">Dollar Cost Averaging (DCA)</div>
+      <div class="card-sub">Invertir el mismo monto mensualmente sin importar el precio. Reduce el impacto del market timing.</div>
+    </div>
+    <div class="card" style="--card-color: var(--accent4)">
+      <div class="card-icon">🔄</div>
+      <div class="card-title">Rebalancear la cartera</div>
+      <div class="card-sub">Cada 3-6 meses ajustar los porcentajes. Si CEDEARs subieron mucho, vender y redistribuir.</div>
+    </div>
+    <div class="card" style="--card-color: var(--accent)">
+      <div class="card-icon">💧</div>
+      <div class="card-title">Mantener liquidez</div>
+      <div class="card-sub">Siempre tener un 10-15% en cauciones o FCI para aprovechar oportunidades o emergencias.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== IMPUESTOS ==================== -->
+<section id="impuestos" class="section">
+  <div class="section-header">
+    <h2>Guía de Impuestos para Inversores</h2>
+    <span class="section-tag">ARCA (EX-AFIP) · PERSONAS FÍSICAS</span>
+  </div>
+
+  <div class="alert alert-warn">
+    <span>⚠️</span>
+    <div><strong>Importante:</strong> Esta información es para personas físicas residentes en Argentina. Consultar con un contador para tu situación específica. La normativa puede cambiar.</div>
+  </div>
+
+  <div class="grid-2" style="margin-bottom:2rem">
+    <div class="card" style="--card-color: var(--accent3)">
+      <div class="card-icon">🎬</div>
+      <div class="card-title">Impuesto a las Ganancias</div>
+      <div class="card-sub">"La película" — grava los resultados de todo el año calendario (enero–diciembre). Se aplica sobre la ganancia obtenida de cada instrumento según su tipo.</div>
+    </div>
+    <div class="card" style="--card-color: var(--accent5)">
+      <div class="card-icon">📸</div>
+      <div class="card-title">Bienes Personales (IBP)</div>
+      <div class="card-sub">"La foto" — grava el patrimonio al 31 de diciembre de cada año. Se aplica sobre el valor de los activos que tengas ese día, según el tipo de bien.</div>
+    </div>
+  </div>
+
+  <h3>Tabla Resumen de Tratamiento Fiscal</h3>
+
+  <div style="overflow-x:auto">
+    <table class="tax-table" style="min-width:750px">
+      <thead>
+        <tr>
+          <th>ACTIVO</th>
+          <th>GANANCIAS – VENTA/CAPITAL</th>
+          <th>GANANCIAS – RENTA/DIVIDENDOS</th>
+          <th>BIENES PERSONALES (IBP)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Acciones locales cotizadas (BYMA)</strong></td>
+          <td><span class="tax-badge badge-green">✅ EXENTA</span></td>
+          <td><span class="tax-badge badge-yellow">7% retención definitiva</span><br><small style="color:var(--muted)">La empresa retiene y paga</small></td>
+          <td><span class="tax-badge badge-green">No computable</span><br><small style="color:var(--muted)">Empresa paga 0.5% resp. sustituto</small></td>
+        </tr>
+        <tr>
+          <td><strong>CEDEARs</strong></td>
+          <td><span class="tax-badge badge-green">✅ EXENTA</span><br><small style="color:var(--muted)">Art. 20 inc. w) Ley Ganancias</small></td>
+          <td><span class="tax-badge badge-red">Gravado</span><br><small style="color:var(--muted)">Escala progresiva hasta 35% (renta extranjera)</small></td>
+          <td><span class="tax-badge badge-red">Gravado</span><br><small style="color:var(--muted)">0.7% a 2.25% como bien del exterior</small></td>
+        </tr>
+        <tr>
+          <td><strong>Bonos soberanos argentinos</strong><br><small style="color:var(--muted)">Nacionales, prov., municipales</small></td>
+          <td><span class="tax-badge badge-green">✅ EXENTA</span></td>
+          <td><span class="tax-badge badge-green">✅ EXENTA</span></td>
+          <td><span class="tax-badge badge-green">✅ EXENTO</span></td>
+        </tr>
+        <tr>
+          <td><strong>ONs Corporativas (en pesos)</strong></td>
+          <td><span class="tax-badge badge-green">✅ EXENTA</span></td>
+          <td><span class="tax-badge badge-green">✅ EXENTA</span><br><small style="color:var(--muted)">Si cumplen condiciones emisión</small></td>
+          <td><span class="tax-badge badge-green">✅ EXENTA</span></td>
+        </tr>
+        <tr>
+          <td><strong>ONs Corporativas (USD hard)</strong></td>
+          <td><span class="tax-badge badge-green">✅ EXENTA</span></td>
+          <td><span class="tax-badge badge-green">✅ EXENTA</span></td>
+          <td><span class="tax-badge badge-yellow">Verificar composición</span></td>
+        </tr>
+        <tr>
+          <td><strong>Cauciones bursátiles</strong></td>
+          <td>N/A</td>
+          <td><span class="tax-badge badge-green">✅ EXENTA (en pesos)</span><br><span class="tax-badge badge-yellow">USD: gravado por escala</span></td>
+          <td><span class="tax-badge badge-green">✅ EXENTA en pesos</span></td>
+        </tr>
+        <tr>
+          <td><strong>FCI (Fondos Comunes)</strong></td>
+          <td><span class="tax-badge badge-green">EXENTA si +75% activos exentos</span></td>
+          <td>Depende composición del fondo</td>
+          <td>Proporcional a activos gravados</td>
+        </tr>
+        <tr>
+          <td><strong>ADRs (en bolsa exterior)</strong></td>
+          <td><span class="tax-badge badge-red">15% cedular</span><br><small style="color:var(--muted)">Base en pesos con ajuste por inflación</small></td>
+          <td><span class="tax-badge badge-red">Escala hasta 35%</span></td>
+          <td><span class="tax-badge badge-yellow">0.7% a 2.25%</span></td>
+        </tr>
+        <tr>
+          <td><strong>Plazos Fijos (en pesos)</strong></td>
+          <td>N/A</td>
+          <td><span class="tax-badge badge-green">✅ EXENTO</span></td>
+          <td><span class="tax-badge badge-yellow">Gravado si supera MNI</span></td>
+        </tr>
+        <tr>
+          <td><strong>Plazos Fijos (en USD)</strong></td>
+          <td>N/A</td>
+          <td><span class="tax-badge badge-red">Gravado escala progresiva</span></td>
+          <td><span class="tax-badge badge-yellow">Gravado si supera MNI</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-gap"></div>
+  <h3>🔑 Puntos Clave a Recordar</h3>
+  <div class="grid-2">
+    <div class="accordion-item" onclick="toggleAccordion(this)">
+      <div class="accordion-header">
+        <div class="accordion-title">💡 ¿Por qué los CEDEARs son tan convenientes?</div>
+        <span class="accordion-arrow">▼</span>
+      </div>
+      <div class="accordion-body">
+        <div class="accordion-content">
+          Los CEDEARs tienen un tratamiento muy favorable: la <strong>venta está exenta</strong> de Ganancias (la ganancia de capital no tributa), lo que los hace extremadamente eficientes fiscalmente para dolarizarse. Solo tributan los dividendos que cobres, como renta extranjera. En IBP están gravados como bienes del exterior, pero si adheriste al REIBP, ya tenés cubierto hasta 2027.
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item" onclick="toggleAccordion(this)">
+      <div class="accordion-header">
+        <div class="accordion-title">💡 ¿Qué es el REIBP y conviene adherir?</div>
+        <span class="accordion-arrow">▼</span>
+      </div>
+      <div class="accordion-body">
+        <div class="accordion-content">
+          El Régimen Especial de Ingreso del IBP permitió pagar 0.45% por año sobre tenencias en dólares (5 cuotas) cerrando la obligación de Bienes Personales hasta 2027. Si ya adheriste, tus activos quedan cubiertos independientemente de cómo varíen. La ventaja: da previsibilidad fiscal y simplifica la declaración.
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item" onclick="toggleAccordion(this)">
+      <div class="accordion-header">
+        <div class="accordion-title">💡 ¿Cuándo debo declarar mis inversiones?</div>
+        <span class="accordion-arrow">▼</span>
+      </div>
+      <div class="accordion-body">
+        <div class="accordion-content">
+          Si sos empleado en relación de dependencia y tus ingresos anuales totales superan ciertos mínimos, debés presentar declaración jurada. Las inversiones financieras se declaran en el Impuesto a las Ganancias (si generan renta gravada) y en Bienes Personales (el patrimonio al 31/12). Tu ALyC debe enviarte un resumen anual con todas las operaciones.
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item" onclick="toggleAccordion(this)">
+      <div class="accordion-header">
+        <div class="accordion-title">💡 Los quebrantos de CEDEARs son "específicos"</div>
+        <span class="accordion-arrow">▼</span>
+      </div>
+      <div class="accordion-body">
+        <div class="accordion-content">
+          Si perdés dinero vendiendo CEDEARs, ese quebranto es "específico" y solo puede compensarse con ganancias del mismo tipo (otras ventas de CEDEARs). NO podés usar una pérdida de CEDEAR para reducir ganancias de otro tipo de activo. Por eso es importante planificar las ventas con criterio fiscal.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== BROKERS ==================== -->
+<section id="brokers" class="section">
+  <div class="section-header">
+    <h2>ALyC y Brokers en Argentina 2026</h2>
+    <span class="section-tag">REGULADOS CNV · BYMA</span>
+  </div>
+
+  <div class="alert alert-info">
+    <span>ℹ️</span>
+    <div>Todos los ALyC de esta lista están <strong>regulados y autorizados por la CNV</strong>. Para invertir en BYMA, es <strong>obligatorio</strong> operar a través de uno de ellos. No se puede operar directamente.</div>
+  </div>
+
+  <h3>¿Qué debo evaluar al elegir un ALyC?</h3>
+  <div class="grid-4" style="margin-bottom:2rem">
+    <div class="card" style="--card-color: var(--accent)">
+      <div class="card-icon">💸</div>
+      <div class="card-title">Comisiones</div>
+      <div class="card-sub">Buscar comisión de compra-venta baja. Comparar también custodia y transferencias.</div>
+    </div>
+    <div class="card" style="--card-color: var(--accent2)">
+      <div class="card-icon">📱</div>
+      <div class="card-title">Plataforma</div>
+      <div class="card-sub">Web y app mobile. Facilidad de uso, velocidad, herramientas de análisis.</div>
+    </div>
+    <div class="card" style="--card-color: var(--accent3)">
+      <div class="card-icon">🎓</div>
+      <div class="card-title">Educación</div>
+      <div class="card-sub">Cursos, webinars, informes de mercado. Fundamental para principiantes.</div>
+    </div>
+    <div class="card" style="--card-color: var(--accent5)">
+      <div class="card-icon">📦</div>
+      <div class="card-title">Activos disponibles</div>
+      <div class="card-sub">Variedad de CEDEARs, bonos, FCI, futuros. No todos ofrecen lo mismo.</div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="broker-card">
+      <div class="broker-header">
+        <div>
+          <div class="broker-name">IOL (Invertir Online)</div>
+          <div class="broker-type">ALyC Propio · IOL invertironline</div>
+        </div>
+        <div class="broker-stars">
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+        </div>
+      </div>
+      <p style="font-size:0.82rem;color:var(--muted)">Uno de los más recomendados para principiantes. Plataforma intuitiva, material educativo, más de 250.000 clientes activos.</p>
+      <div class="broker-features">
+        <span class="feature-tag">✅ Educación gratuita</span>
+        <span class="feature-tag">✅ App móvil</span>
+        <span class="feature-tag">✅ CEDEARs</span>
+        <span class="feature-tag">✅ FCI</span>
+        <span class="feature-tag">✅ Bonos</span>
+        <span class="feature-tag">✅ Acciones</span>
+      </div>
+      <div class="broker-score">
+        <div class="score-item"><div class="score-val">9/10</div><div class="score-label">Facilidad</div></div>
+        <div class="score-item"><div class="score-val">8/10</div><div class="score-label">Comisiones</div></div>
+        <div class="score-item"><div class="score-val">10/10</div><div class="score-label">Educación</div></div>
+        <div class="score-item"><div class="score-val">9/10</div><div class="score-label">General</div></div>
+      </div>
+    </div>
+
+    <div class="broker-card">
+      <div class="broker-header">
+        <div>
+          <div class="broker-name">Balanz Capital</div>
+          <div class="broker-type">ALyC · +30 años en el mercado</div>
+        </div>
+        <div class="broker-stars">
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+        </div>
+      </div>
+      <p style="font-size:0.82rem;color:var(--muted)">Plataforma líder, interfaz intuitiva. Amplia variedad de FCI. Sin depósito mínimo, sin costo apertura ni mantenimiento.</p>
+      <div class="broker-features">
+        <span class="feature-tag">✅ Sin mínimo</span>
+        <span class="feature-tag">✅ FCI variados</span>
+        <span class="feature-tag">✅ Wealth Mgmt</span>
+        <span class="feature-tag">✅ CEDEARs</span>
+        <span class="feature-tag">✅ Opciones</span>
+      </div>
+      <div class="broker-score">
+        <div class="score-item"><div class="score-val">9/10</div><div class="score-label">Facilidad</div></div>
+        <div class="score-item"><div class="score-val">8/10</div><div class="score-label">Comisiones</div></div>
+        <div class="score-item"><div class="score-val">9/10</div><div class="score-label">Activos</div></div>
+        <div class="score-item"><div class="score-val">9/10</div><div class="score-label">General</div></div>
+      </div>
+    </div>
+
+    <div class="broker-card">
+      <div class="broker-header">
+        <div>
+          <div class="broker-name">Cocos Capital</div>
+          <div class="broker-type">ALyC Fintech · 100% digital</div>
+        </div>
+        <div class="broker-stars">
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star empty">★</span>
+        </div>
+      </div>
+      <p style="font-size:0.82rem;color:var(--muted)">Broker moderno con foco en CEDEARs. Cartera recomendada actualizada regularmente. Buena atención al cliente.</p>
+      <div class="broker-features">
+        <span class="feature-tag">✅ CEDEARs líder</span>
+        <span class="feature-tag">✅ Cartera sugerida</span>
+        <span class="feature-tag">✅ App moderna</span>
+        <span class="feature-tag">✅ Análisis técnico</span>
+      </div>
+      <div class="broker-score">
+        <div class="score-item"><div class="score-val">9/10</div><div class="score-label">UX/UI</div></div>
+        <div class="score-item"><div class="score-val">8/10</div><div class="score-label">Comisiones</div></div>
+        <div class="score-item"><div class="score-val">8/10</div><div class="score-label">Variedad</div></div>
+        <div class="score-item"><div class="score-val">8/10</div><div class="score-label">General</div></div>
+      </div>
+    </div>
+
+    <div class="broker-card">
+      <div class="broker-header">
+        <div>
+          <div class="broker-name">Bull Market Brokers</div>
+          <div class="broker-type">ALyC Propio · CNV #247 · BYMA #200</div>
+        </div>
+        <div class="broker-stars">
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star empty">★</span>
+        </div>
+      </div>
+      <p style="font-size:0.82rem;color:var(--muted)">Plataforma completa con licitaciones online, dólares al mejor precio. 11 años líder en renta variable. Asesoramiento on-demand.</p>
+      <div class="broker-features">
+        <span class="feature-tag">✅ Licitaciones online</span>
+        <span class="feature-tag">✅ USD MEP</span>
+        <span class="feature-tag">✅ Asesoramiento</span>
+        <span class="feature-tag">✅ Futuros</span>
+        <span class="feature-tag">✅ Opciones</span>
+      </div>
+      <div class="broker-score">
+        <div class="score-item"><div class="score-val">8/10</div><div class="score-label">Herramientas</div></div>
+        <div class="score-item"><div class="score-val">8/10</div><div class="score-label">Comisiones</div></div>
+        <div class="score-item"><div class="score-val">9/10</div><div class="score-label">Activos</div></div>
+        <div class="score-item"><div class="score-val">8/10</div><div class="score-label">General</div></div>
+      </div>
+    </div>
+
+    <div class="broker-card">
+      <div class="broker-header">
+        <div>
+          <div class="broker-name">Rava Bursátil</div>
+          <div class="broker-type">ALyC · Plataforma avanzada</div>
+        </div>
+        <div class="broker-stars">
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star empty">★</span>
+        </div>
+      </div>
+      <p style="font-size:0.82rem;color:var(--muted)">Sofisticadas herramientas de análisis técnico. Más orientado a traders con experiencia. Amplia gama de mercados.</p>
+      <div class="broker-features">
+        <span class="feature-tag">✅ Análisis técnico avanzado</span>
+        <span class="feature-tag">✅ Futuros ROFEX</span>
+        <span class="feature-tag">✅ Datos en tiempo real</span>
+      </div>
+      <div class="broker-score">
+        <div class="score-item"><div class="score-val">7/10</div><div class="score-label">Facilidad</div></div>
+        <div class="score-item"><div class="score-val">9/10</div><div class="score-label">Herramientas</div></div>
+        <div class="score-item"><div class="score-val">8/10</div><div class="score-label">Activos</div></div>
+        <div class="score-item"><div class="score-val">8/10</div><div class="score-label">General</div></div>
+      </div>
+    </div>
+
+    <div class="broker-card">
+      <div class="broker-header">
+        <div>
+          <div class="broker-name">PUENTE</div>
+          <div class="broker-type">ALyC · Internacional · +30 años</div>
+        </div>
+        <div class="broker-stars">
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star empty">★</span>
+        </div>
+      </div>
+      <p style="font-size:0.82rm;color:var(--muted)">Fuerte presencia local e internacional. Acceso a mercados globales y amplia gama de CEDEARs. Ideal para carteras con componente internacional.</p>
+      <div class="broker-features">
+        <span class="feature-tag">✅ Mercados internacionales</span>
+        <span class="feature-tag">✅ CEDEARs</span>
+        <span class="feature-tag">✅ Bonos soberanos</span>
+        <span class="feature-tag">✅ Research propio</span>
+      </div>
+      <div class="broker-score">
+        <div class="score-item"><div class="score-val">7/10</div><div class="score-label">Facilidad</div></div>
+        <div class="score-item"><div class="score-val">8/10</div><div class="score-label">Global</div></div>
+        <div class="score-item"><div class="score-val">9/10</div><div class="score-label">Activos</div></div>
+        <div class="score-item"><div class="score-val">8/10</div><div class="score-label">General</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Guía de elección -->
+  <div class="section-gap"></div>
+  <div class="section-header"><h2>¿Cuál elegir según tu perfil?</h2></div>
+  <div style="overflow-x:auto">
+    <table class="tax-table" style="min-width:600px">
+      <thead>
+        <tr>
+          <th>SI ERES...</th>
+          <th>BROKER RECOMENDADO</th>
+          <th>POR QUÉ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>🌱 <strong>Principiante total</strong></td>
+          <td><strong>IOL o Balanz</strong></td>
+          <td>Interfaz simple, educación incluida, sin mínimo de inversión</td>
+        </tr>
+        <tr>
+          <td>💵 <strong>Quiero dolarizarme con CEDEARs</strong></td>
+          <td><strong>Cocos Capital o IOL</strong></td>
+          <td>Enfocados en CEDEARs, cartera sugerida, análisis actualizado</td>
+        </tr>
+        <tr>
+          <td>📊 <strong>Trader activo / técnico</strong></td>
+          <td><strong>Rava Bursátil o Bull Market</strong></td>
+          <td>Herramientas avanzadas, datos en tiempo real, futuros y opciones</td>
+        </tr>
+        <tr>
+          <td>🌍 <strong>Inversor internacional</strong></td>
+          <td><strong>PUENTE o Bull Market</strong></td>
+          <td>Acceso a mercados globales, amplia gama de instrumentos</td>
+        </tr>
+        <tr>
+          <td>💼 <strong>Alto patrimonio / gestión profesional</strong></td>
+          <td><strong>Balanz o PUENTE</strong></td>
+          <td>Servicio Wealth Management, asesoramiento personalizado</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ==================== GLOSARIO ==================== -->
+<section id="glosario" class="section">
+  <div class="section-header">
+    <h2>Glosario del Inversor Argentino</h2>
+    <span class="section-tag">TÉRMINOS CLAVE</span>
+  </div>
+
+  <input type="text" class="search-box" placeholder="🔍 Buscar término..." id="glossary-search" oninput="filterGlossary()">
+
+  <div class="glossary-grid" id="glossary-grid">
+    <div class="gloss-card" data-term="byma">
+      <div class="gloss-term">BYMA</div>
+      <div class="gloss-def">Bolsas y Mercados Argentinos. Principal mercado de valores de Argentina donde se negocian acciones, bonos, CEDEARs y demás instrumentos financieros.</div>
+    </div>
+    <div class="gloss-card" data-term="alyc">
+      <div class="gloss-term">ALyC</div>
+      <div class="gloss-def">Agente de Liquidación y Compensación. Entidad autorizada por la CNV para operar en el mercado de capitales. Es lo que en otros países se llama "broker".</div>
+    </div>
+    <div class="gloss-card" data-term="cnv">
+      <div class="gloss-term">CNV</div>
+      <div class="gloss-def">Comisión Nacional de Valores. Organismo regulador del mercado de capitales argentino. Todos los ALyC deben estar registrados y autorizados por ella.</div>
+    </div>
+    <div class="gloss-card" data-term="cedear">
+      <div class="gloss-term">CEDEAR</div>
+      <div class="gloss-def">Certificado de Depósito Argentino. Instrumento que representa acciones de empresas extranjeras (AAPL, GOOGL, SPY) pero se negocia en pesos en BYMA.</div>
+    </div>
+    <div class="gloss-card" data-term="merval">
+      <div class="gloss-term">MERVAL</div>
+      <div class="gloss-def">Mercado de Valores de Buenos Aires. También es el nombre del índice principal de la bolsa argentina, compuesto por las 23 acciones más operadas.</div>
+    </div>
+    <div class="gloss-card" data-term="cuenta comitente">
+      <div class="gloss-term">CUENTA COMITENTE</div>
+      <div class="gloss-def">Cuenta de inversión en un ALyC donde se registran todos tus activos financieros. Es el equivalente a una cuenta bancaria pero para inversiones bursátiles.</div>
+    </div>
+    <div class="gloss-card" data-term="tir">
+      <div class="gloss-term">TIR / YTM</div>
+      <div class="gloss-def">Tasa Interna de Retorno / Yield to Maturity. Rendimiento anualizado de un bono si lo mantenés hasta el vencimiento, incluyendo todos los pagos de cupones.</div>
+    </div>
+    <div class="gloss-card" data-term="riesgo pais">
+      <div class="gloss-term">RIESGO PAÍS</div>
+      <div class="gloss-def">Indicador EMBI+ que mide el diferencial de tasa entre los bonos argentinos y los del Tesoro de EE.UU. Actualmente ~500 puntos básicos en 2026.</div>
+    </div>
+    <div class="gloss-card" data-term="on obligaciones negociables">
+      <div class="gloss-term">ON</div>
+      <div class="gloss-def">Obligaciones Negociables. Deuda corporativa emitida por empresas privadas. Similar a los bonos del estado pero emitidos por empresas como YPF o Pampa.</div>
+    </div>
+    <div class="gloss-card" data-term="fci fondos comunes inversion">
+      <div class="gloss-term">FCI</div>
+      <div class="gloss-def">Fondo Común de Inversión. Vehículo colectivo donde varios inversores agrupan dinero y un administrador profesional lo gestiona comprando distintos activos.</div>
+    </div>
+    <div class="gloss-card" data-term="caucion bursatil">
+      <div class="gloss-term">CAUCIÓN BURSÁTIL</div>
+      <div class="gloss-def">Préstamo a corto plazo en el mercado bursátil respaldado por garantías. Permite a los inversores colocar su dinero a tasa fija por períodos de 1 a 120 días.</div>
+    </div>
+    <div class="gloss-card" data-term="dca dollar cost averaging">
+      <div class="gloss-term">DCA</div>
+      <div class="gloss-def">Dollar Cost Averaging. Estrategia de invertir el mismo monto de dinero regularmente (semanal/mensual) sin importar el precio del activo, promediando el costo.</div>
+    </div>
+    <div class="gloss-card" data-term="p/e precio ganancias">
+      <div class="gloss-term">P/E RATIO</div>
+      <div class="gloss-def">Price to Earnings. Relación entre el precio de la acción y las ganancias por acción. Indica cuántas veces estás pagando las ganancias anuales de la empresa.</div>
+    </div>
+    <div class="gloss-card" data-term="roe retorno capital">
+      <div class="gloss-term">ROE</div>
+      <div class="gloss-def">Return on Equity. Retorno sobre el patrimonio neto. Mide qué tan eficientemente la empresa genera ganancias con el capital de sus accionistas.</div>
+    </div>
+    <div class="gloss-card" data-term="mep dolar bolsa">
+      <div class="gloss-term">DÓLAR MEP</div>
+      <div class="gloss-def">Dólar "Bolsa" o MEP (Medio Electrónico de Pago). Tipo de cambio implícito que surge de comprar un bono en pesos y venderlo en dólares dentro del país.</div>
+    </div>
+    <div class="gloss-card" data-term="ccl contado con liquidacion">
+      <div class="gloss-term">DÓLAR CCL</div>
+      <div class="gloss-def">Contado con Liquidación. Similar al MEP pero la operación liquida en el exterior. Permite transferir dólares a cuentas del exterior de forma legal.</div>
+    </div>
+    <div class="gloss-card" data-term="spread diferencial">
+      <div class="gloss-term">SPREAD</div>
+      <div class="gloss-def">Diferencia entre el precio de compra (ask) y el precio de venta (bid) de un activo. Cuanto más angosto el spread, más líquido es el mercado.</div>
+    </div>
+    <div class="gloss-card" data-term="liquidacion t2">
+      <div class="gloss-term">LIQUIDACIÓN T+2</div>
+      <div class="gloss-def">Las acciones y la mayoría de los activos liquidan a "T+2": se debita o acredita el dinero en tu cuenta 2 días hábiles después de ejecutada la orden.</div>
+    </div>
+    <div class="gloss-card" data-term="arca afip impuestos">
+      <div class="gloss-term">ARCA</div>
+      <div class="gloss-def">Agencia de Recaudación y Control Aduanero (ex-AFIP). Organismo recaudador de impuestos en Argentina ante el cual debés declarar tus inversiones si corresponde.</div>
+    </div>
+    <div class="gloss-card" data-term="rebalanceo cartera">
+      <div class="gloss-term">REBALANCEO</div>
+      <div class="gloss-def">Ajuste periódico de los porcentajes de tu cartera para mantener la distribución deseada. Ejemplo: si CEDEARs subieron del 30% al 45%, vendés el exceso.</div>
+    </div>
+    <div class="gloss-card" data-term="rsi indicador tecnico">
+      <div class="gloss-term">RSI</div>
+      <div class="gloss-def">Relative Strength Index. Indicador de momentum de 0 a 100. Valores bajo 30 sugieren sobrevendido (oportunidad de compra); sobre 70, sobrecomprado.</div>
+    </div>
+    <div class="gloss-card" data-term="duration duracion bono">
+      <div class="gloss-term">DURATION</div>
+      <div class="gloss-def">Duración modificada de un bono. Mide la sensibilidad del precio del bono a cambios en las tasas de interés. A mayor duration, más volátil ante cambios de tasas.</div>
+    </div>
+    <div class="gloss-card" data-term="benchmark indice referencia">
+      <div class="gloss-term">BENCHMARK</div>
+      <div class="gloss-def">Índice de referencia para comparar el rendimiento de tu cartera. En Argentina, el MERVAL es el principal benchmark para acciones locales.</div>
+    </div>
+    <div class="gloss-card" data-term="cer inflacion ajuste">
+      <div class="gloss-term">CER</div>
+      <div class="gloss-def">Coeficiente de Estabilización de Referencia. Índice que ajusta el capital de ciertos bonos por inflación. Los bonos BONCER ajustan capital por este índice.</div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<script>
+  // TABS
+  function showSection(id) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    event.currentTarget.classList.add('active');
+  }
+
+  // ACCORDION
+  function toggleAccordion(el) {
+    el.classList.toggle('open');
+    const body = el.querySelector('.accordion-body');
+    if (el.classList.contains('open')) {
+      body.classList.add('open');
+    } else {
+      body.classList.remove('open');
+    }
+  }
+
+  // ROADMAP STEP
+  function toggleStep(el) {
+    el.querySelector('.step-content').style.borderColor = 
+      el.querySelector('.step-dot').style.color;
+  }
+
+  // CHECKLIST
+  function toggleCheck(el) {
+    el.classList.toggle('done');
+    const box = el.querySelector('.check-box');
+    if (el.classList.contains('done')) {
+      box.textContent = '✓';
+    }
+    updateProgress();
+  }
+
+  function updateProgress() {
+    const total = document.querySelectorAll('.checklist-item').length;
+    const done = document.querySelectorAll('.checklist-item.done').length;
+    // Could show progress somewhere
+  }
+
+  // PORTFOLIO PROFILES
+  function showProfile(profile, btn) {
+    document.querySelectorAll('.profile-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    ['conservador','moderado','agresivo','dolar'].forEach(p => {
+      const el = document.getElementById('portfolio-' + p);
+      if (el) el.style.display = p === profile ? 'block' : 'none';
+    });
+  }
+
+  // GLOSSARY FILTER
+  function filterGlossary() {
+    const q = document.getElementById('glossary-search').value.toLowerCase();
+    document.querySelectorAll('.gloss-card').forEach(card => {
+      const term = card.dataset.term || '';
+      const text = card.textContent.toLowerCase();
+      card.style.display = (text.includes(q) || term.includes(q)) ? 'block' : 'none';
+    });
+  }
+
+  // ANIMATE CARDS ON SECTION CHANGE
+  document.querySelectorAll('.nav-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      setTimeout(() => {
+        document.querySelectorAll('.section.active .card, .section.active .kpi-card, .section.active .broker-card').forEach((el, i) => {
+          el.style.opacity = '0';
+          el.style.transform = 'translateY(20px)';
+          setTimeout(() => {
+            el.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+            el.style.opacity = '1';
+            el.style.transform = 'translateY(0)';
+          }, i * 60);
+        });
+      }, 50);
+    });
+  });
+
+  // INIT PROGRESS BARS ANIMATION
+  window.addEventListener('load', () => {
+    document.querySelectorAll('.progress-fill').forEach(bar => {
+      const w = bar.style.width;
+      bar.style.width = '0';
+      setTimeout(() => { bar.style.width = w; }, 500);
+    });
+  });
+</script>
+</body>
+</html>
